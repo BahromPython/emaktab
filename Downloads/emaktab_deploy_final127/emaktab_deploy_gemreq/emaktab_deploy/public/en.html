@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="eMaktab is a free online school built for Tajikistan — 3,574 lessons, grades 1–11, with an AI tutor in the Tajik language. Built by one developer, free for every student.">
+<meta property="og:title" content="eMaktab — Free Online School for Tajikistan">
+<meta property="og:description" content="3,574 lessons · 79 subjects · Grades 1–11 · AI tutor in Tajik · Free forever">
+<meta property="og:url" content="https://emaktab.tj/en">
+<title>eMaktab — Free Online School for Tajikistan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #c8960c;
+  --gold-light: #f5c842;
+  --dark: #0d1117;
+  --gray: #6b7280;
+  --light: #f9fafb;
+  --border: #e5e7eb;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: white;
+  color: var(--dark);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-brand {
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--dark);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-brand span {
+  color: var(--gold);
+}
+.nav-lang {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.nav-lang a {
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 5px 12px;
+  border-radius: 6px;
+  color: var(--gray);
+  transition: all 0.15s;
+}
+.nav-lang a:hover { background: var(--light); color: var(--dark); }
+.nav-lang a.active {
+  background: var(--dark);
+  color: white;
+}
+.nav-cta {
+  background: var(--gold);
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 8px 18px !important;
+  border-radius: 8px !important;
+}
+.nav-cta:hover { background: #b8860b !important; }
+
+/* ─── HERO ─── */
+.hero {
+  padding: 100px 40px 80px;
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-block;
+  background: #fef9c3;
+  color: #92400e;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 28px;
+}
+.hero h1 {
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  color: var(--dark);
+  margin-bottom: 24px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--gold);
+}
+.hero-sub {
+  font-size: 18px;
+  color: var(--gray);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+  font-weight: 400;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--dark);
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary:hover { background: #1f2937; transform: translateY(-1px); }
+.btn-secondary {
+  background: white;
+  color: var(--dark);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  transition: all 0.15s;
+}
+.btn-secondary:hover { border-color: #9ca3af; transform: translateY(-1px); }
+
+/* ─── STATS BAND ─── */
+.stats-band {
+  background: var(--dark);
+  color: white;
+  padding: 48px 40px;
+}
+.stats-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+.stat-num {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--gold-light);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 13px;
+  color: #9ca3af;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ─── SECTION SHARED ─── */
+.section {
+  padding: 80px 40px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.section-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.section h2 {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.section-lead {
+  font-size: 16px;
+  color: var(--gray);
+  max-width: 600px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+/* ─── PROBLEM ─── */
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.problem-card {
+  background: #fef9c3;
+  border-left: 4px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 20px 22px;
+}
+.problem-card .pc-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: #78350f;
+  margin-bottom: 6px;
+}
+.problem-card .pc-text {
+  font-size: 13px;
+  color: #92400e;
+  line-height: 1.6;
+}
+.problem-quote {
+  grid-column: 1 / -1;
+  background: var(--light);
+  border-radius: 12px;
+  padding: 28px 32px;
+  font-size: 17px;
+  font-style: italic;
+  color: var(--dark);
+  line-height: 1.7;
+  font-weight: 500;
+  border-left: 4px solid var(--gold);
+}
+
+/* ─── WHAT IS ─── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.feature-card {
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 22px 20px;
+  transition: border-color 0.15s;
+}
+.feature-card:hover { border-color: var(--gold); }
+.feature-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+.feature-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.feature-text {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+/* ─── DIVIDER ─── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0 40px;
+}
+
+/* ─── AI SECTION ─── */
+.ai-block {
+  background: var(--dark);
+  border-radius: 16px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.ai-text .ai-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.ai-text h3 {
+  font-size: 24px;
+  font-weight: 800;
+  color: white;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.ai-text p {
+  font-size: 14px;
+  color: #9ca3af;
+  line-height: 1.7;
+}
+.ai-chat {
+  background: #1f2937;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.chat-bubble {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.chat-bubble.student {
+  background: #374151;
+  color: #e5e7eb;
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+}
+.chat-bubble.ai {
+  background: var(--gold);
+  color: #0d1117;
+  align-self: flex-end;
+  font-weight: 500;
+  border-bottom-right-radius: 2px;
+}
+.chat-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+/* ─── BUILDER ─── */
+.builder-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.builder-text p {
+  font-size: 15px;
+  color: #374151;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.builder-text p strong {
+  color: var(--dark);
+}
+.builder-callout {
+  background: var(--light);
+  border-radius: 12px;
+  padding: 28px;
+}
+.callout-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray);
+  margin-bottom: 16px;
+}
+.stack-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.stack-item:last-child { margin-bottom: 0; }
+.stack-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+.stack-body .stack-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--dark);
+}
+.stack-body .stack-desc {
+  font-size: 12px;
+  color: var(--gray);
+}
+
+/* ─── CTA SECTION ─── */
+.cta-section {
+  background: var(--gold);
+  padding: 80px 40px;
+  text-align: center;
+}
+.cta-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.cta-section h2 {
+  font-size: 32px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+.cta-section p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+.cta-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-white {
+  background: white;
+  color: var(--dark);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  transition: all 0.15s;
+}
+.btn-white:hover { background: #f9fafb; transform: translateY(-1px); }
+.btn-outline-white {
+  background: transparent;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.5);
+  transition: all 0.15s;
+}
+.btn-outline-white:hover { border-color: white; transform: translateY(-1px); }
+
+/* ─── CONTACT ─── */
+.contact-section {
+  padding: 64px 40px;
+  max-width: 860px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.contact-text h3 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.contact-text p {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--dark);
+  text-decoration: none;
+  font-weight: 500;
+}
+.contact-link:hover { color: var(--gold); }
+.contact-link .cl-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--light);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.press-box {
+  background: var(--light);
+  border-radius: 12px;
+  padding: 24px;
+}
+.press-box .press-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.press-box .press-text {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.press-box a {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+  text-decoration: none;
+}
+.press-box a:hover { text-decoration: underline; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--dark);
+  color: #6b7280;
+  padding: 32px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+footer .footer-brand {
+  font-weight: 800;
+  color: white;
+  font-size: 15px;
+}
+footer .footer-brand span { color: var(--gold); }
+footer .footer-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+footer .footer-links a {
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.15s;
+}
+footer .footer-links a:hover { color: white; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 700px) {
+  nav { padding: 12px 20px; }
+  .hero { padding: 60px 20px 48px; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .section { padding: 56px 20px; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
+  .ai-block { grid-template-columns: 1fr; }
+  .builder-block { grid-template-columns: 1fr; }
+  .contact-section { grid-template-columns: 1fr; padding: 48px 20px; }
+  .cta-section { padding: 56px 20px; }
+  footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+  .divider { margin: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="/en">e<span>Maktab</span></a>
+  <div class="nav-lang">
+    <a href="/" title="Тоҷикӣ">🇹🇯 Тоҷикӣ</a>
+    <a href="/en" class="active">🇬🇧 English</a>
+    <a href="/app" class="nav-cta">Open Platform →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Free · Online · Tajikistan</div>
+  <h1>A free school for every student<br>in <em>Tajikistan</em></h1>
+  <p class="hero-sub">
+    eMaktab is a free online learning platform covering grades 1–11 with 3,574 lessons across 79 subjects — built by one developer, funded by no one, for every student in the country.
+  </p>
+  <div class="hero-actions">
+    <a href="/app" class="btn-primary">Open eMaktab →</a>
+    <a href="#what-is" class="btn-secondary">Learn more</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-num">3,574</div>
+      <div class="stat-label">Lessons across<br>all subjects</div>
+    </div>
+    <div>
+      <div class="stat-num">79</div>
+      <div class="stat-label">Subjects covered<br>in the curriculum</div>
+    </div>
+    <div>
+      <div class="stat-num">Gr. 1–11</div>
+      <div class="stat-label">Full school coverage<br>primary to secondary</div>
+    </div>
+    <div>
+      <div class="stat-num">Free</div>
+      <div class="stat-label">No fees, no ads,<br>no subscriptions — ever</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<div class="section" id="problem">
+  <div class="section-tag">The Problem</div>
+  <h2>In Tajikistan, quality education<br>depends on your postcode</h2>
+  <p class="section-lead">
+    Students in the capital, Dushanbe, have access to private tutors, prep courses, and quality resources. Students in rural districts — Murghab, Ishkoshim, Vanj — have none of that.
+  </p>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="pc-title">No private tutors outside cities</div>
+      <div class="pc-text">Most rural families cannot afford or access private tutoring. National exam preparation (ВОА) is critical for university entrance — and unavailable for millions of students.</div>
+    </div>
+    <div class="problem-card">
+      <div class="pc-title">No Tajik-language digital resources</div>
+      <div class="pc-text">Existing EdTech platforms are in Russian, English, or Uzbek — not Tajik. Students who learn in Tajik have been effectively excluded from the digital education revolution.</div>
+    </div>
+    <div class="problem-quote">
+      "The quality of a student's education in Tajikistan is determined almost entirely by the city they were born in. eMaktab exists to change that."
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- WHAT IS -->
+<div class="section" id="what-is">
+  <div class="section-tag">The Platform</div>
+  <h2>What eMaktab is</h2>
+  <p class="section-lead">A complete, free, Tajik-language school platform — covering the full national curriculum from grade 1 to grade 11.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📚</div>
+      <div class="feature-title">Full curriculum</div>
+      <div class="feature-text">3,574 structured lessons across 79 subjects, aligned to the Tajikistan national school curriculum for grades 1 through 11.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <div class="feature-title">AI tutor in Tajik</div>
+      <div class="feature-text">A conversational AI tutor that answers student questions in the Tajik language — the first of its kind for Tajikistan's 9 million people.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📶</div>
+      <div class="feature-title">Works offline</div>
+      <div class="feature-text">Designed to work in low-connectivity rural areas. Students can access lessons even with intermittent or no internet connection.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎓</div>
+      <div class="feature-title">National exam prep (ВОА)</div>
+      <div class="feature-text">Dedicated preparation for the national university entrance exam — the gateway to higher education for every Tajik student.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <div class="feature-title">Mobile-first</div>
+      <div class="feature-text">Most students in Tajikistan access the internet via smartphone. eMaktab is fully responsive and installable as an app on any phone.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💰</div>
+      <div class="feature-title">Free forever</div>
+      <div class="feature-text">No subscription, no paywall, no ads. Built entirely by one developer on a zero budget, and committed to staying free for every student.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- AI SECTION -->
+<div class="section" id="ai">
+  <div class="section-tag">AI Tutor</div>
+  <h2>The first AI tutor<br>in the Tajik language</h2>
+  <p class="section-lead">Every student deserves a tutor who speaks their language. eMaktab's AI answers questions, explains concepts, and helps students work through problems — in Tajik.</p>
+  <div class="ai-block">
+    <div class="ai-text">
+      <div class="ai-tag">How it works</div>
+      <h3>Ask anything.<br>Get an answer in Tajik.</h3>
+      <p>Students type any question about their lesson — a math problem, a grammar rule, a history event — and the AI responds clearly in Tajik. It remembers the conversation context, so follow-up questions work naturally.</p>
+      <br>
+      <p style="color:#6b7280;">Available from any device, no login required for basic access. The AI is powered by the Gemini model, routed through a secure server-side proxy so no API keys are ever exposed to the student.</p>
+    </div>
+    <div class="ai-chat">
+      <div>
+        <div class="chat-label">Student</div>
+        <div class="chat-bubble student">Чаро Замин атрофи Офтоб мегардад?</div>
+      </div>
+      <div style="align-self:flex-end; text-align:right;">
+        <div class="chat-label" style="text-align:right;">eMaktab AI</div>
+        <div class="chat-bubble ai">Замин ба сабаби қувваи ҷозибаи Офтоб атрофи он мегардад. Ин қувва Заминро дар мадор нигоҳ медорад ва аз дур шудани он пешгирӣ мекунад...</div>
+      </div>
+      <div>
+        <div class="chat-label">Student</div>
+        <div class="chat-bubble student">Мадор чист?</div>
+      </div>
+      <div style="align-self:flex-end; text-align:right;">
+        <div class="chat-label" style="text-align:right;">eMaktab AI</div>
+        <div class="chat-bubble ai">Мадор роҳест, ки як ҷисм атрофи ҷисми дигар мегардад — мисли роҳи Замин атрофи Офтоб...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- BUILDER -->
+<div class="section" id="builder">
+  <div class="section-tag">The Story</div>
+  <h2>Built by one person,<br>for an entire country</h2>
+  <div class="builder-block">
+    <div class="builder-text">
+      <p>
+        eMaktab was designed, built, and maintained entirely by <strong>Bahrom Ashurov</strong> — a student from Tajikistan with no team, no funding, and no institutional backing.
+      </p>
+      <p>
+        Every lesson was curated. Every subject was structured. The platform was built from scratch as a single-page web application, with an offline-first architecture so it works even where internet is unreliable.
+      </p>
+      <p>
+        The AI tutor — the first to respond in the Tajik language — was integrated as a secure server-side proxy, so students in rural schools can ask questions without exposing any API credentials.
+      </p>
+      <p>
+        <strong>The goal is simple:</strong> every student in Tajikistan, regardless of where they live or how much their family earns, should have access to the same quality of education.
+      </p>
+    </div>
+    <div class="builder-callout">
+      <div class="callout-title">Technical Stack</div>
+      <div class="stack-item">
+        <div class="stack-dot"></div>
+        <div class="stack-body">
+          <div class="stack-name">Firebase Hosting + Firestore</div>
+          <div class="stack-desc">Serverless hosting, real-time database, user authentication</div>
+        </div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-dot"></div>
+        <div class="stack-body">
+          <div class="stack-name">Gemini AI (server-side proxy)</div>
+          <div class="stack-desc">Tajik-language AI tutor via secure Cloud Functions</div>
+        </div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-dot"></div>
+        <div class="stack-body">
+          <div class="stack-name">Service Worker + Cache API</div>
+          <div class="stack-desc">Offline-first architecture for low-connectivity areas</div>
+        </div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-dot"></div>
+        <div class="stack-body">
+          <div class="stack-name">Progressive Web App (PWA)</div>
+          <div class="stack-desc">Installable on any Android or iOS device, no app store needed</div>
+        </div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-dot"></div>
+        <div class="stack-body">
+          <div class="stack-name">Single-page architecture</div>
+          <div class="stack-desc">3,574 lessons in a single optimized HTML file, loads once and runs offline</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <h2>Try eMaktab now</h2>
+    <p>Free for every student in Tajikistan. No sign-up required to browse. Open the platform and start learning.</p>
+    <div class="cta-buttons">
+      <a href="/app" class="btn-white">Open the platform →</a>
+      <a href="mailto:bahromasurov708@gmail.com" class="btn-outline-white">Contact the developer</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-text">
+    <h3>Get in touch</h3>
+    <p>
+      For school partnerships, press inquiries, NGO collaboration, or anything else — reach out directly. eMaktab is open to any partnership that helps more students learn.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:bahromasurov708@gmail.com" class="contact-link">
+        <div class="cl-icon">✉️</div>
+        bahromasurov708@gmail.com
+      </a>
+      <a href="https://emaktab.tj" class="contact-link">
+        <div class="cl-icon">🌐</div>
+        emaktab.tj
+      </a>
+      <a href="https://www.instagram.com/_.bahrrrom._" class="contact-link" target="_blank" rel="noopener">
+        <div class="cl-icon">📸</div>
+        @_.bahrrrom._
+      </a>
+    </div>
+  </div>
+  <div class="press-box">
+    <div class="press-title">For press &amp; media</div>
+    <div class="press-text">
+      Journalists, bloggers, and researchers writing about education in Central Asia or EdTech in Tajikistan are welcome to reach out for interviews, data, or a product walkthrough.
+    </div>
+    <div class="press-text">
+      eMaktab is the only free, Tajik-language, AI-powered school platform in existence. The story of one developer building a school for an entire country — with no budget — tends to resonate.
+    </div>
+    <a href="mailto:bahromasurov708@gmail.com?subject=Press inquiry — eMaktab">Send a press inquiry →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">e<span>Maktab</span> · emaktab.tj</div>
+  <div class="footer-links">
+    <a href="/app">Platform</a>
+    <a href="/">Тоҷикӣ</a>
+    <a href="/en">English</a>
+    <a href="mailto:bahromasurov708@gmail.com">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
