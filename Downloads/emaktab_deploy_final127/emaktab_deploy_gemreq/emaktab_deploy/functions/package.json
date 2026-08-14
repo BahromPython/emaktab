@@ -1,0 +1,14 @@
+{
+  "name": "emaktab-functions",
+  "description": "Secure Gemini AI proxy for eMaktab",
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-functions": "^5.0.0",
+    "firebase-admin": "^12.0.0",
+    "@google/genai": "^0.3.0"
+  },
+  "private": true
+}

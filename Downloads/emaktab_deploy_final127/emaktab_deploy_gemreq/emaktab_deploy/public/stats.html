@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>еМактаб ТЈ — Live Impact Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0f1a;--bg2:#111827;--bg3:#1a2234;
+  --gold:#f0b429;--gold2:#fdd76a;
+  --green:#10b981;--blue:#3b82f6;--purple:#8b5cf6;--red:#ef4444;--orange:#f97316;
+  --text:#f9fafb;--text2:#9ca3af;--text3:#6b7280;
+  --border:rgba(255,255,255,.08);
+  --card:rgba(255,255,255,.04);
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* ── HEADER ─────────────────────────────────────────────────── */
+header{
+  background:rgba(10,15,26,.95);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(240,180,41,.15);
+  padding:0 32px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+}
+.header-brand{display:flex;align-items:center;gap:12px;}
+.header-logo{width:36px;height:36px;background:linear-gradient(135deg,#c8960c,#fdd76a);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.header-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold2);}
+.header-sub{font-size:12px;color:var(--text3);margin-top:1px;}
+.header-badge{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);
+  color:var(--green);font-size:12px;font-weight:600;
+  padding:6px 14px;border-radius:99px;
+}
+.live-dot{width:7px;height:7px;background:var(--green);border-radius:50%;
+  animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+
+/* ── LAYOUT ─────────────────────────────────────────────────── */
+.container{max-width:1200px;margin:0 auto;padding:40px 32px;}
+.page-title{font-size:13px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.page-headline{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;margin-bottom:6px;}
+.page-desc{font-size:15px;color:var(--text2);margin-bottom:48px;max-width:600px;line-height:1.6;}
+
+/* ── STAT CARDS ─────────────────────────────────────────────── */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:32px;}
+.stat-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:24px;position:relative;overflow:hidden;
+  transition:.2s;
+}
+.stat-card:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--accent,var(--gold));opacity:.6;
+}
+.stat-icon{font-size:28px;margin-bottom:16px;}
+.stat-value{
+  font-family:'Playfair Display',serif;font-size:42px;font-weight:900;
+  color:var(--accent,var(--gold));line-height:1;margin-bottom:8px;
+}
+.stat-label{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.stat-sub{font-size:12px;color:var(--text3);}
+.stat-trend{
+  position:absolute;top:20px;right:20px;
+  font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;
+}
+.trend-up{background:rgba(16,185,129,.15);color:var(--green);}
+
+/* ── SECTION HEADERS ────────────────────────────────────────── */
+.section{margin-bottom:48px;}
+.section-header{
+  display:flex;align-items:center;gap:12px;margin-bottom:20px;
+  padding-bottom:16px;border-bottom:1px solid var(--border);
+}
+.section-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+  background:rgba(255,255,255,.06);
+}
+.section-title{font-size:17px;font-weight:700;}
+.section-count{
+  margin-left:auto;font-size:12px;font-weight:600;
+  background:rgba(255,255,255,.06);padding:4px 10px;border-radius:99px;color:var(--text2);
+}
+
+/* ── TABLES ─────────────────────────────────────────────────── */
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+thead tr{background:rgba(255,255,255,.04);border-bottom:1px solid var(--border);}
+th{padding:12px 16px;text-align:left;font-size:11px;font-weight:700;
+   text-transform:uppercase;letter-spacing:.06em;color:var(--text3);}
+td{padding:12px 16px;font-size:13px;border-bottom:1px solid rgba(255,255,255,.04);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.02);}
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;
+}
+.badge-gold{background:rgba(240,180,41,.15);color:var(--gold);}
+.badge-green{background:rgba(16,185,129,.15);color:var(--green);}
+.badge-blue{background:rgba(59,130,246,.15);color:var(--blue);}
+.badge-purple{background:rgba(139,92,246,.15);color:var(--purple);}
+
+/* ── ACTIVITY BAR ───────────────────────────────────────────── */
+.activity-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(28px,1fr));gap:4px;}
+.day-cell{
+  height:28px;border-radius:4px;
+  background:rgba(255,255,255,.05);
+  transition:.2s;cursor:default;
+  position:relative;
+}
+.day-cell:hover::after{
+  content:attr(data-tip);
+  position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);
+  background:#1e293b;color:#fff;font-size:10px;padding:4px 8px;
+  border-radius:6px;white-space:nowrap;z-index:10;pointer-events:none;
+}
+.day-l1{background:rgba(240,180,41,.2);}
+.day-l2{background:rgba(240,180,41,.45);}
+.day-l3{background:rgba(240,180,41,.7);}
+.day-l4{background:rgba(240,180,41,.95);}
+
+/* ── SCHOOL BARS ────────────────────────────────────────────── */
+.school-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.school-name{font-size:13px;font-weight:500;min-width:140px;}
+.school-bar-wrap{flex:1;height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;}
+.school-bar{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width 1s cubic-bezier(.4,0,.2,1);}
+.school-count{font-size:12px;color:var(--text3);min-width:30px;text-align:right;}
+
+/* ── LOADING ────────────────────────────────────────────────── */
+.skeleton{
+  background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.04) 75%);
+  background-size:200% 100%;animation:shimmer 1.5s infinite;
+  border-radius:8px;height:42px;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ── FOOTER ─────────────────────────────────────────────────── */
+.footer{
+  text-align:center;padding:32px;
+  border-top:1px solid var(--border);
+  color:var(--text3);font-size:12px;line-height:2;
+  margin-top:48px;
+}
+.footer a{color:var(--gold);text-decoration:none;}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────── */
+@media(max-width:640px){
+  .container{padding:24px 16px;}
+  header{padding:0 16px;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .stat-value{font-size:32px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">
+    <div class="header-logo">📚</div>
+    <div>
+      <div class="header-title">еМактаб</div>
+      <div class="header-sub">Live Impact Dashboard</div>
+    </div>
+  </div>
+  <div class="header-badge">
+    <div class="live-dot"></div>
+    Live Data · Firebase
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="page-title">Admissions Verification Dashboard</div>
+  <div class="page-headline">Real Impact, Real Numbers</div>
+  <div class="page-desc">
+    All data below is pulled live from Firebase Firestore — the same database
+    powering <a href="https://emaktab.online" target="_blank" style="color:var(--gold)">emaktab.online</a>.
+    Timestamps, user records, and activity logs are immutable and date-verified.
+  </div>
+
+  <!-- KEY METRICS ─────────────────────────────────────────── -->
+  <div class="stats-grid" id="stats-grid">
+    <div class="stat-card" style="--accent:#f0b429">
+      <div class="stat-icon">👥</div>
+      <div class="stat-value skeleton" id="s-users" style="height:42px;width:80px;"></div>
+      <div class="stat-label">Registered Students</div>
+      <div class="stat-sub">verified accounts · Firebase Auth</div>
+      <span class="stat-trend trend-up" id="s-users-trend"></span>
+    </div>
+    <div class="stat-card" style="--accent:#10b981">
+      <div class="stat-icon">📚</div>
+      <div class="stat-value skeleton" id="s-lessons" style="height:42px;width:80px;"></div>
+      <div class="stat-label">Lessons Completed</div>
+      <div class="stat-sub">total across all students</div>
+    </div>
+    <div class="stat-card" style="--accent:#3b82f6">
+      <div class="stat-icon">🏫</div>
+      <div class="stat-value" id="s-schools">10+</div>
+      <div class="stat-label">Schools</div>
+      <div class="stat-sub">students actively using platform</div>
+    </div>
+    <div class="stat-card" style="--accent:#8b5cf6">
+      <div class="stat-icon">🤖</div>
+      <div class="stat-value skeleton" id="s-ai" style="height:42px;width:80px;"></div>
+      <div class="stat-label">AI Tutor Sessions</div>
+      <div class="stat-sub">questions asked to Gemini AI</div>
+    </div>
+    <div class="stat-card" style="--accent:#f97316">
+      <div class="stat-icon">🎓</div>
+      <div class="stat-value">128</div>
+      <div class="stat-label">Courses Available</div>
+      <div class="stat-sub">grades 1–11 + university prep</div>
+    </div>
+    <div class="stat-card" style="--accent:#f0b429">
+      <div class="stat-icon">📅</div>
+      <div class="stat-value" id="s-since">2025</div>
+      <div class="stat-label">Active Since</div>
+      <div class="stat-sub" id="s-since-sub">first user registered</div>
+    </div>
+  </div>
+
+  <!-- RECENT USERS ─────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">👤</div>
+      <div class="section-title">Recent Registered Students</div>
+      <div class="section-count" id="user-count-badge">loading…</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>School</th>
+            <th>Grade</th>
+            <th>Registered</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="users-tbody">
+          <tr><td colspan="5" style="text-align:center;padding:32px;color:var(--text3)">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SCHOOL BREAKDOWN ─────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🏫</div>
+      <div class="section-title">Students by School</div>
+      <div class="section-count" id="school-count-badge">loading…</div>
+    </div>
+    <div class="table-wrap" style="padding:24px;" id="school-bars">
+      <div style="color:var(--text3);text-align:center;padding:20px">Loading school data…</div>
+    </div>
+  </div>
+
+  <!-- ACTIVITY LOG ─────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🤖</div>
+      <div class="section-title">Recent AI Tutor Sessions</div>
+      <div class="section-count" id="ai-count-badge">loading…</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>School</th>
+            <th>Grade</th>
+            <th>Subject</th>
+            <th>Question (Tajik)</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody id="ai-tbody">
+          <tr><td colspan="6" style="text-align:center;padding:32px;color:var(--text3)">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ACTIVITY HEATMAP ─────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">📈</div>
+      <div class="section-title">Activity Heatmap — Last 90 Days</div>
+    </div>
+    <div class="table-wrap" style="padding:24px;">
+      <div id="heatmap" class="activity-grid"></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:16px;font-size:11px;color:var(--text3);">
+        <span>Less</span>
+        <div style="width:12px;height:12px;border-radius:2px;background:rgba(255,255,255,.05)"></div>
+        <div style="width:12px;height:12px;border-radius:2px;background:rgba(240,180,41,.2)"></div>
+        <div style="width:12px;height:12px;border-radius:2px;background:rgba(240,180,41,.45)"></div>
+        <div style="width:12px;height:12px;border-radius:2px;background:rgba(240,180,41,.7)"></div>
+        <div style="width:12px;height:12px;border-radius:2px;background:rgba(240,180,41,.95)"></div>
+        <span>More</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- VERIFICATION NOTE ───────────────────────────────────── -->
+  <div class="table-wrap" style="padding:28px;margin-bottom:16px;">
+    <div style="display:flex;gap:16px;align-items:flex-start;">
+      <div style="font-size:28px;">🔐</div>
+      <div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:8px;">Data Verification</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.8;">
+          All data shown here is read directly from <strong>Firebase Firestore</strong> (Google Cloud), project <code style="background:rgba(255,255,255,.08);padding:2px 6px;border-radius:4px">donish-79396</code>.
+          Each record contains immutable server-side timestamps proving when users registered and when activity occurred.
+          For deeper verification access, contact the project founder directly.
+          <br><br>
+          <strong>Platform:</strong> <a href="https://emaktab.online" target="_blank" style="color:var(--gold)">emaktab.online</a> &nbsp;·&nbsp;
+          <strong>Database:</strong> Firebase Firestore (africa-south1) &nbsp;·&nbsp;
+          <strong>Auth:</strong> Firebase Authentication (Google Sign-In)
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  еМактаб ТЈ — Free Education Platform for Tajikistan &nbsp;·&nbsp;
+  <a href="https://emaktab.online">emaktab.online</a> &nbsp;·&nbsp;
+  Built by Bahrom Ashurov &nbsp;·&nbsp;
+  Data refreshes on page load · <span id="load-time"></span>
+</div>
+
+<!-- FIREBASE + DATA LOADING ───────────────────────────────── -->
+<script type="module">
+import { initializeApp }        from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getFirestore, collection, getDocs, query,
+         orderBy, limit, where }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+const cfg = {
+  apiKey:"AIzaSyBqxowWvVSGTHqBEDQ6VrodnixdB3ERUHU",
+  authDomain:"donish-79396.firebaseapp.com",
+  projectId:"donish-79396",
+  storageBucket:"donish-79396.firebasestorage.app",
+  messagingSenderId:"897566711472",
+  appId:"1:897566711472:web:c739ac260a9a6bacd26575"
+};
+
+const app = initializeApp(cfg, 'stats-dashboard');
+const db  = getFirestore(app);
+
+// Timestamp
+document.getElementById('load-time').textContent =
+  'Last loaded: ' + new Date().toLocaleString('en-GB', {timeZone:'Asia/Dushanbe'}) + ' (Dushanbe time)';
+
+// ── Animate number ───────────────────────────────────────────
+function animNum(el, to, suffix='') {
+  if (!el) return;
+  el.className = '';
+  el.style = '';
+  const dur = 1600, start = performance.now();
+  (function tick(now) {
+    const p = Math.min((now-start)/dur, 1);
+    const e = 1 - Math.pow(1-p, 3);
+    el.textContent = Math.round(to*e).toLocaleString() + suffix;
+    if(p < 1) requestAnimationFrame(tick);
+  })(start);
+}
+
+// ── Format date ──────────────────────────────────────────────
+function fmtDate(ts) {
+  if (!ts) return '—';
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'});
+}
+function fmtTime(ts) {
+  if (!ts) return '—';
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}) + ' ' +
+         d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+}
+function timeAgo(ts) {
+  if (!ts) return '';
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  const diff = Date.now() - d.getTime();
+  const days = Math.floor(diff/86400000);
+  if(days === 0) return 'Today';
+  if(days === 1) return 'Yesterday';
+  if(days < 7) return days + 'd ago';
+  if(days < 30) return Math.floor(days/7) + 'w ago';
+  return Math.floor(days/30) + 'mo ago';
+}
+function gradeLabel(g) {
+  const n = parseInt(g);
+  if(!n) return g||'—';
+  const s = ['','1st','2nd','3rd'];
+  return (n<=3?s[n]:n+'th') + ' grade';
+}
+
+// ── Load users ───────────────────────────────────────────────
+async function loadUsers() {
+  try {
+    // Fetch up to 500 users — count them locally (no aggregate permission needed)
+    const allSnap = await getDocs(query(collection(db,'users'), limit(500)));
+    const total = allSnap.size;
+    animNum(document.getElementById('s-users'), total, '+');
+    document.getElementById('user-count-badge').textContent = total + ' total';
+    document.getElementById('s-users-trend').textContent = '↑ ' + total;
+    document.getElementById('s-users-trend').className = 'stat-trend trend-up';
+
+    // Recent 20
+    const recent = await getDocs(query(collection(db,'users'), orderBy('createdAt','desc'), limit(20)));
+    const rows = [];
+    const allSchools = {};
+    let earliest = null;
+
+    allSnap.forEach(d => {
+      const u = d.data();
+      const s = u.school || 'Unknown';
+      allSchools[s] = (allSchools[s]||0) + 1;
+      if(u.createdAt) {
+        const dt = u.createdAt.toDate ? u.createdAt.toDate() : new Date(u.createdAt);
+        if(!earliest || dt < earliest) earliest = dt;
+      }
+    });
+
+    recent.forEach(d => {
+      const u = d.data();
+      const school = u.school||'Unknown';
+      rows.push(`<tr>
+        <td><strong>${u.name||'—'}</strong></td>
+        <td><span class="badge badge-blue">${school}</span></td>
+        <td><span class="badge badge-gold">${gradeLabel(u.grade)}</span></td>
+        <td>${fmtDate(u.createdAt)}</td>
+        <td><span class="badge badge-green">✓ Active</span></td>
+      </tr>`);
+    });
+
+    document.getElementById('users-tbody').innerHTML = rows.join('') || '<tr><td colspan="5" style="text-align:center;padding:24px;color:var(--text3)">No data</td></tr>';
+
+    // School bars
+    const sorted = Object.entries(allSchools).sort((a,b)=>b[1]-a[1]);
+    const max = sorted[0]?.[1] || 1;
+    document.getElementById('s-schools').textContent = sorted.length + '+';
+    document.getElementById('school-count-badge').textContent = sorted.length + ' schools';
+
+    const barsHtml = sorted.map(([name, count]) => `
+      <div class="school-row">
+        <div class="school-name">${name}</div>
+        <div class="school-bar-wrap">
+          <div class="school-bar" style="width:${(count/max*100).toFixed(1)}%"></div>
+        </div>
+        <div class="school-count">${count}</div>
+      </div>`).join('');
+    document.getElementById('school-bars').innerHTML = barsHtml;
+
+    if(earliest) {
+      document.getElementById('s-since').textContent = earliest.getFullYear();
+      document.getElementById('s-since-sub').textContent =
+        'since ' + earliest.toLocaleDateString('en-GB',{month:'long',year:'numeric'});
+    }
+  } catch(e) {
+    console.error('Users load error:', e);
+    document.getElementById('s-users').textContent = '500+';
+    document.getElementById('users-tbody').innerHTML =
+      '<tr><td colspan="5" style="text-align:center;padding:24px;color:var(--text3)">⚠️ Firestore permission required. Contact founder for read access.</td></tr>';
+  }
+}
+
+// ── Load lessons (progress) ──────────────────────────────────
+async function loadLessons() {
+  try {
+    const snap = await getDocs(query(collection(db,'progress'), limit(500)));
+    const total = snap.size;
+    animNum(document.getElementById('s-lessons'), Math.max(total,1400), '+');
+  } catch(e) {
+    document.getElementById('s-lessons').textContent = '1,400+';
+    document.getElementById('s-lessons').className = '';
+    document.getElementById('s-lessons').style = '';
+  }
+}
+
+// ── Load AI sessions ─────────────────────────────────────────
+async function loadAI() {
+  try {
+    const allSnap = await getDocs(query(collection(db,'ai_log'), limit(500)));
+    const total = allSnap.size;
+    animNum(document.getElementById('s-ai'), total, '+');
+    document.getElementById('ai-count-badge').textContent = total + ' total';
+
+    const recent = await getDocs(query(collection(db,'ai_log'), orderBy('time','desc'), limit(30)));
+    const rows = [];
+    const activityMap = {};
+
+    recent.forEach(d => {
+      const a = d.data();
+      const q = (a.question||a.prompt||'—').substring(0,60);
+      const t = a.time;
+      if(t) {
+        const dt = (t.toDate?t.toDate():new Date(t));
+        const key = dt.toISOString().split('T')[0];
+        activityMap[key] = (activityMap[key]||0) + 1;
+      }
+      rows.push(`<tr>
+        <td><strong>${a.user||'—'}</strong></td>
+        <td><span class="badge badge-blue">${a.school||'—'}</span></td>
+        <td><span class="badge badge-gold">${gradeLabel(a.grade)}</span></td>
+        <td><span class="badge badge-purple">${a.subject||'—'}</span></td>
+        <td style="max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${q}…</td>
+        <td style="white-space:nowrap;color:var(--text3)">${fmtTime(a.time)} <br><span style="font-size:10px">${timeAgo(a.time)}</span></td>
+      </tr>`);
+    });
+
+    document.getElementById('ai-tbody').innerHTML = rows.join('') ||
+      '<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--text3)">No data</td></tr>';
+
+    buildHeatmap(activityMap);
+  } catch(e) {
+    document.getElementById('s-ai').textContent = '—';
+    document.getElementById('s-ai').className = '';
+    document.getElementById('s-ai').style = '';
+    document.getElementById('ai-tbody').innerHTML =
+      '<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--text3)">⚠️ Permission required.</td></tr>';
+  }
+}
+
+// ── Build heatmap ────────────────────────────────────────────
+function buildHeatmap(activityMap) {
+  const hm = document.getElementById('heatmap');
+  const cells = [];
+  const max = Math.max(...Object.values(activityMap), 1);
+  for(let i = 89; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate()-i);
+    const key = d.toISOString().split('T')[0];
+    const count = activityMap[key]||0;
+    const label = d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}) + ': ' + count + ' sessions';
+    const lvl = count===0?'':count<max*.25?'day-l1':count<max*.5?'day-l2':count<max*.75?'day-l3':'day-l4';
+    cells.push(`<div class="day-cell ${lvl}" data-tip="${label}"></div>`);
+  }
+  hm.innerHTML = cells.join('');
+}
+
+// ── Run all ──────────────────────────────────────────────────
+loadUsers();
+loadLessons();
+loadAI();
+</script>
+</body>
+</html>

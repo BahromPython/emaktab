@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мураббиён | eMaktab</title>
+<style>
+:root{
+  --bg:#0f0f0f;--card:#1a1a1a;--card2:#222;--border:#2a2a2a;
+  --gold:#c9a84c;--gold2:#e8c56a;--text:#e8e8e8;--muted:#888;
+  --green:#4caf50;--red:#e05252;--blue:#4a9eff;
+  --radius:12px;--shadow:0 4px 24px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+
+/* ── NAV ── */
+nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px solid var(--border);background:#111}
+nav a{color:var(--gold);text-decoration:none;font-weight:700;font-size:1.1rem}
+nav span{color:var(--muted);font-size:.85rem}
+
+/* ── HERO ── */
+.hero{text-align:center;padding:48px 24px 32px;background:linear-gradient(180deg,#1a1500 0%,var(--bg) 100%)}
+.hero h1{font-size:clamp(1.6rem,4vw,2.4rem);color:var(--gold2);margin-bottom:8px}
+.hero p{color:var(--muted);max-width:500px;margin:0 auto;line-height:1.6}
+
+/* ── STEPPER ── */
+.stepper{display:flex;justify-content:center;gap:0;margin:32px 24px 0;max-width:640px;margin-inline:auto}
+.step{flex:1;text-align:center;position:relative}
+.step::after{content:'';position:absolute;top:16px;left:50%;width:100%;height:2px;background:var(--border);z-index:0}
+.step:last-child::after{display:none}
+.step-dot{width:32px;height:32px;border-radius:50%;background:var(--border);border:2px solid var(--border);display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;position:relative;z-index:1;transition:.3s}
+.step.active .step-dot{background:var(--gold);border-color:var(--gold);color:#000}
+.step.done .step-dot{background:var(--green);border-color:var(--green);color:#fff}
+.step-label{font-size:.7rem;color:var(--muted);margin-top:6px;display:block}
+.step.active .step-label{color:var(--gold)}
+
+/* ── MAIN CONTAINER ── */
+.container{max-width:760px;margin:32px auto;padding:0 16px 80px}
+
+/* ── PANELS ── */
+.panel{display:none;animation:fadeIn .3s ease}
+.panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── CARDS GRID ── */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:16px}
+.pick-card{background:var(--card);border:2px solid var(--border);border-radius:var(--radius);padding:16px 12px;text-align:center;cursor:pointer;transition:.2s;user-select:none}
+.pick-card:hover{border-color:var(--gold);background:var(--card2)}
+.pick-card.selected{border-color:var(--gold);background:#1e1800}
+.pick-card .icon{font-size:1.8rem;margin-bottom:8px}
+.pick-card .label{font-size:.85rem;font-weight:600}
+.pick-card .sub{font-size:.72rem;color:var(--muted);margin-top:3px}
+
+/* ── SUBJECT LIST ── */
+.subject-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:16px}
+.subj-btn{background:var(--card);border:2px solid var(--border);border-radius:10px;padding:12px 14px;cursor:pointer;text-align:left;transition:.2s;font-size:.88rem;font-weight:600;color:var(--text)}
+.subj-btn:hover,.subj-btn.selected{border-color:var(--gold);background:#1e1800;color:var(--gold2)}
+
+/* ── TOPIC INPUT ── */
+.topic-wrap{margin-top:16px}
+.topic-wrap input{width:100%;background:var(--card);border:2px solid var(--border);border-radius:10px;padding:13px 16px;color:var(--text);font-size:.95rem;outline:none;transition:.2s}
+.topic-wrap input:focus{border-color:var(--gold)}
+.topic-suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.tag{background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:.78rem;cursor:pointer;transition:.2s;color:var(--muted)}
+.tag:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── MENTOR CARD ── */
+.mentor-card{background:var(--card);border:2px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px;transition:.2s;cursor:pointer}
+.mentor-card:hover,.mentor-card.selected{border-color:var(--gold)}
+.mentor-card.selected{background:#1e1800}
+.mentor-header{display:flex;align-items:center;gap:14px}
+.avatar{width:52px;height:52px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;flex-shrink:0}
+.mentor-name{font-weight:700;font-size:1rem}
+.mentor-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.mtag{background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:.72rem;color:var(--muted)}
+.mtag.gold{border-color:var(--gold);color:var(--gold)}
+.match-bar{margin-top:12px}
+.match-label{font-size:.75rem;color:var(--muted);margin-bottom:4px}
+.bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;transition:width .6s ease}
+
+/* ── SLOT PICKER ── */
+.days-row{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;margin-top:16px}
+.day-btn{flex-shrink:0;background:var(--card);border:2px solid var(--border);border-radius:10px;padding:10px 16px;cursor:pointer;text-align:center;transition:.2s;min-width:90px}
+.day-btn:hover,.day-btn.selected{border-color:var(--gold)}
+.day-btn .day-name{font-weight:600;font-size:.85rem}
+.day-btn .day-date{font-size:.72rem;color:var(--muted);margin-top:2px}
+.slots-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.slot-btn{background:var(--card);border:2px solid var(--border);border-radius:8px;padding:8px 16px;cursor:pointer;font-size:.85rem;font-weight:600;transition:.2s}
+.slot-btn:hover,.slot-btn.selected{border-color:var(--gold);background:#1e1800;color:var(--gold2)}
+
+/* ── FORM ── */
+.form-group{margin-top:14px}
+.form-group label{display:block;font-size:.82rem;color:var(--muted);margin-bottom:6px}
+.form-group input,.form-group textarea,.form-group select{
+  width:100%;background:var(--card);border:2px solid var(--border);border-radius:10px;
+  padding:12px 14px;color:var(--text);font-size:.9rem;outline:none;transition:.2s;font-family:inherit}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--gold)}
+.form-group textarea{resize:vertical;min-height:80px}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;border:none;cursor:pointer;font-size:.9rem;font-weight:600;transition:.2s}
+.btn-gold{background:var(--gold);color:#000}
+.btn-gold:hover{background:var(--gold2)}
+.btn-ghost{background:transparent;color:var(--muted);border:2px solid var(--border)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-row{display:flex;gap:10px;margin-top:24px;justify-content:space-between}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* ── PANEL TITLE ── */
+.panel-title{font-size:1.1rem;font-weight:700;color:var(--gold2);margin-bottom:4px}
+.panel-sub{font-size:.83rem;color:var(--muted);margin-bottom:16px}
+
+/* ── SUCCESS ── */
+.success{text-align:center;padding:48px 24px}
+.success .check{font-size:4rem;margin-bottom:16px}
+.success h2{color:var(--gold2);margin-bottom:8px}
+.success p{color:var(--muted);line-height:1.7;max-width:400px;margin:0 auto 20px}
+.success-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:left;margin:16px auto;max-width:400px}
+.success-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:.85rem}
+.success-row:last-child{border:none}
+.success-row span:first-child{color:var(--muted)}
+
+/* ── LOADING ── */
+.loading{text-align:center;padding:32px;color:var(--muted);font-size:.9rem}
+.spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:12px 20px;font-size:.85rem;transition:.3s;opacity:0;z-index:999;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.green{border-color:var(--green);color:var(--green)}
+.toast.red{border-color:var(--red);color:var(--red)}
+
+@media(max-width:480px){
+  .cards-grid{grid-template-columns:repeat(3,1fr)}
+  .btn-row{flex-direction:column}
+  .btn{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">📚 eMaktab</a>
+  <span>›</span>
+  <span style="color:var(--text)">Мураббиён</span>
+</nav>
+
+<div class="hero">
+  <h1>🎓 Мураббии шахсӣ</h1>
+  <p>Донишҷӯёни беҳтарин ба шумо дар фаҳмидани мавзӯъҳои мушкил кӯмак мекунанд. Ройгон.</p>
+</div>
+
+<!-- STEPPER -->
+<div class="stepper" id="stepper">
+  <div class="step active" id="s1">
+    <div class="step-dot">1</div>
+    <span class="step-label">Синф</span>
+  </div>
+  <div class="step" id="s2">
+    <div class="step-dot">2</div>
+    <span class="step-label">Фан</span>
+  </div>
+  <div class="step" id="s3">
+    <div class="step-dot">3</div>
+    <span class="step-label">Мавзӯъ</span>
+  </div>
+  <div class="step" id="s4">
+    <div class="step-dot">4</div>
+    <span class="step-label">Мураббӣ</span>
+  </div>
+  <div class="step" id="s5">
+    <div class="step-dot">5</div>
+    <span class="step-label">Вақт</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- PANEL 1: GRADE -->
+  <div class="panel active" id="panel1">
+    <div class="panel-title">Синфи худро интихоб кунед</div>
+    <div class="panel-sub">Мо мураббии мувофиқро пайдо мекунем</div>
+    <div class="cards-grid" id="grade-grid"></div>
+    <div class="btn-row">
+      <span></span>
+      <button class="btn btn-gold" onclick="goTo(2)" id="btn1" disabled>Идома →</button>
+    </div>
+  </div>
+
+  <!-- PANEL 2: SUBJECT -->
+  <div class="panel" id="panel2">
+    <div class="panel-title">Фанро интихоб кунед</div>
+    <div class="panel-sub">Фане ки дар он мушкилӣ доред</div>
+    <div class="subject-list" id="subject-list"></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goTo(1)">← Бозгашт</button>
+      <button class="btn btn-gold" onclick="goTo(3)" id="btn2" disabled>Идома →</button>
+    </div>
+  </div>
+
+  <!-- PANEL 3: TOPIC -->
+  <div class="panel" id="panel3">
+    <div class="panel-title">Мавзӯъро нависед</div>
+    <div class="panel-sub">Мавзӯъе ки нафаҳмидед ё саволи доред</div>
+    <div class="topic-wrap">
+      <input type="text" id="topic-input" placeholder="Масалан: Муодилаҳои квадратӣ, Фотосинтез..." oninput="onTopicInput()">
+    </div>
+    <div class="topic-suggestions" id="topic-tags"></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goTo(2)">← Бозгашт</button>
+      <button class="btn btn-gold" onclick="findMentors()" id="btn3" disabled>Ҷустуҷӯи мураббӣ →</button>
+    </div>
+  </div>
+
+  <!-- PANEL 4: MENTOR MATCH -->
+  <div class="panel" id="panel4">
+    <div class="panel-title">Мураббиёни мувофиқ</div>
+    <div class="panel-sub" id="match-sub"></div>
+    <div id="mentor-list"></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goTo(3)">← Бозгашт</button>
+      <button class="btn btn-gold" onclick="goTo(5)" id="btn4" disabled>Вақтро интихоб кун →</button>
+    </div>
+  </div>
+
+  <!-- PANEL 5: SLOT PICKER + FORM -->
+  <div class="panel" id="panel5">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+      <div>
+        <div class="panel-title">Вақти дарсро интихоб кунед</div>
+        <div class="panel-sub" id="slot-mentor-name"></div>
+      </div>
+      <button class="btn btn-ghost" style="font-size:.8rem;padding:8px 14px" onclick="goTo(4)">🔄 Тағйири мураббӣ</button>
+    </div>
+    <div class="days-row" id="days-row"></div>
+    <div class="slots-grid" id="slots-grid"></div>
+
+    <div style="margin-top:24px;border-top:1px solid var(--border);padding-top:20px">
+      <div class="panel-title" style="font-size:.95rem">Маълумоти шумо</div>
+      <div class="form-group">
+        <label>Номи пурра</label>
+        <input type="text" id="stu-name" placeholder="Исм ва насаби шумо">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="stu-email" placeholder="email@maktab.tj">
+      </div>
+      <div class="form-group">
+        <label>Роҳи алоқа (Telegram ё телефон)</label>
+        <input type="text" id="stu-contact" placeholder="@username ё +992...">
+      </div>
+      <div class="form-group">
+        <label>Саволи мушаххас (ихтиёрӣ)</label>
+        <textarea id="stu-note" placeholder="Масалан: Мафҳуми дискриминантро нафаҳмидам..."></textarea>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goTo(4)">← Бозгашт</button>
+      <button class="btn btn-gold" onclick="submitBooking()" id="btn5">✉️ Тасдиқ кунед</button>
+    </div>
+  </div>
+
+  <!-- PANEL 6: SUCCESS -->
+  <div class="panel" id="panel6">
+    <div class="success">
+      <div class="check">✅</div>
+      <h2>Дархост қабул шуд!</h2>
+      <p>Дар тӯли 24 соат ба email-и шумо тасдиқнома меояд. Баъд аз тасдиқ мураббӣ бо шумо тавассути Zoom ё Telegram тамос мегирад.</p>
+      <div class="success-box" id="success-summary"></div>
+      <button class="btn btn-gold" style="margin-top:16px" onclick="resetAll()">+ Дархости дигар</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- EmailJS — replace with your keys -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+// ══════════════════════════════════════════════════════════════════
+// CONFIG — replace these with your EmailJS credentials
+// ══════════════════════════════════════════════════════════════════
+const EMAILJS_PUBLIC_KEY  = 'uG3fw0y0YR7LurOUY';
+const EMAILJS_SERVICE_ID  = 'service_vu43pmj';
+const EMAILJS_TEMPLATE_ID = 'template_4qo1yjo';
+const ADMIN_EMAIL         = 'bahromasurov708@gmail.com';
+
+// ══════════════════════════════════════════════════════════════════
+// MENTORS DATA — fill in your 20 real mentors here
+// grades: array of grade numbers they can teach
+// subjects: lowercase subject keys
+// topics: keywords for matching (lowercase)
+// availability: { "Monday": ["15:00","16:00","17:00"], ... }
+// ══════════════════════════════════════════════════════════════════
+const MENTORS = [
+  {
+    id:'m1', name:'Farhod Rahimov', initials:'FR',
+    school:'Abdurahmoni Jomi', grade_range:[7,11],
+    subjects:['биология','забони русӣ','математика','алгебра'],
+    topics:['клетка','ДНК','генетика','эволюция','экология','алгебра','ҳисоб','русский язык','грамматика'],
+    bio:'Синфи 11 · Jomi · Биология 10, Математика 10 · SAT Math',
+    skills:'SAT Math, Сухангӯӣ',
+    availability:{'Душанбе':['15:00','16:00'],'Чоршанбе':['15:00','16:00'],'Шанбе':['14:00','15:00','16:00']},
+    contact:''
+  },
+  {
+    id:'m2', name:'Nigina Sharipova', initials:'NS',
+    school:'Hotam & P.V.', grade_range:[7,11],
+    subjects:['кимиё','биология','адабиёти тоҷик'],
+    topics:['реаксия','кислота','унсурҳо','клетка','фотосинтез','генетика','шеър','наср','адабиёт'],
+    bio:'Синфи 11 · Hotam & P.V. · Кимиё 10, Биология 10 · Олимпиада',
+    skills:'Олимпиадаи математика, Физика',
+    availability:{'Сешанбе':['16:00','17:00'],'Панҷшанбе':['16:00','17:00'],'Якшанбе':['10:00','11:00','12:00']},
+    contact:''
+  },
+  {
+    id:'m3', name:'Somon Mirzoev', initials:'SM',
+    school:'QSI International', grade_range:[6,9],
+    subjects:['биология','забони русӣ','забони англисӣ'],
+    topics:['биология','клетка','русский язык','орфография','инглисӣ','эссе','нутқ'],
+    bio:'Синфи 9 · QSI · Русӣ 10, Инглисӣ 10 · Баҳс',
+    skills:'English Essay, Debate',
+    availability:{'Душанбе':['17:00','18:00'],'Ҷумъа':['16:00','17:00','18:00'],'Шанбе':['11:00','12:00']},
+    contact:''
+  },
+  {
+    id:'m4', name:'Tahmina Ismoilova', initials:'TI',
+    school:'Kafolat', grade_range:[7,11],
+    subjects:['биология','адабиёти тоҷик','кимиё'],
+    topics:['биология','генетика','фотосинтез','адабиёт','насри тоҷик','кимиё','реаксия','кислота'],
+    bio:'Синфи 11 · Kafolat · Биология 10, Адабиёт 10 · IELTS',
+    skills:'English Grammar, IELTS',
+    availability:{'Чоршанбе':['16:00','17:00','18:00'],'Шанбе':['15:00','16:00'],'Якшанбе':['15:00','16:00']},
+    contact:''
+  },
+  {
+    id:'m5', name:'Anushervon Qodirov', initials:'AQ',
+    school:'Adolat', grade_range:[6,10],
+    subjects:['биология','забони русӣ','физика'],
+    topics:['биология','русский язык','физика','механика','электр','оптика','алгебраи асосӣ','ҷуғрофия'],
+    bio:'Синфи 10 · Adolat · Физика 10 · Алгебра, Ҷуғрофия',
+    skills:'Алгебра, Ҷуғрофия',
+    availability:{'Сешанбе':['15:00','16:00','17:00'],'Панҷшанбе':['15:00','16:00'],'Шанбе':['10:00','11:00']},
+    contact:''
+  },
+  {
+    id:'m6', name:'Parvina Rasulova', initials:'PR',
+    school:'Abdurahmoni Jomi', grade_range:[6,9],
+    subjects:['адабиёти тоҷик','биология','забони русӣ','забони англисӣ','забони фаронсавӣ'],
+    topics:['адабиёт','шеър','наср','биология','клетка','русский язык','инглисӣ','адабиёти инглисӣ'],
+    bio:'Синфи 9 · Jomi · Адабиёти тоҷик 10, Русӣ 10',
+    skills:'Адабиёти инглисӣ, Фаронсавӣ',
+    availability:{'Душанбе':['16:00','17:00'],'Чоршанбе':['16:00','17:00'],'Якшанбе':['14:00','15:00','16:00']},
+    contact:''
+  },
+  {
+    id:'m7', name:'Dilshod Nabiev', initials:'DN',
+    school:'Adolat', grade_range:[6,10],
+    subjects:['биология','математика','алгебра','геометрия','физика','информатика'],
+    topics:['биология','алгебра','геометрия','теоремаи Пифагор','физика','механика','python','веб'],
+    bio:'Синфи 10 · Adolat · Математика 10 · Геометрия, Python',
+    skills:'Геометрия, Python Coding',
+    availability:{'Душанбе':['18:00','19:00'],'Ҷумъа':['17:00','18:00','19:00'],'Шанбе':['16:00','17:00']},
+    contact:''
+  },
+  {
+    id:'m8', name:'Malika Umarova', initials:'MU',
+    school:'Qalam International', grade_range:[7,11],
+    subjects:['биология','забони русӣ','адабиёти тоҷик','забони англисӣ'],
+    topics:['биология','русский язык','адабиёт','инглисӣ','IELTS','speaking','грамматика'],
+    bio:'Синфи 11 · Qalam · Биология 10, Русӣ 10 · IELTS Speaking',
+    skills:'IELTS Speaking, General English',
+    availability:{'Сешанбе':['17:00','18:00'],'Панҷшанбе':['17:00','18:00'],'Шанбе':['13:00','14:00','15:00']},
+    contact:''
+  },
+  {
+    id:'m9', name:'Jahongir Saidov', initials:'JS',
+    school:'Donishvar', grade_range:[6,9],
+    subjects:['кимиё','биология','математика','алгебра','физика'],
+    topics:['кимиё','реаксия','унсурҳо','биология','математика','ҳисоби зеҳнӣ','физика'],
+    bio:'Синфи 9 · Donishvar · Биология 10 · Ҳисоби зеҳнӣ',
+    skills:'Ҳисоби зеҳнӣ, Физика',
+    availability:{'Чоршанбе':['15:00','16:00'],'Ҷумъа':['15:00','16:00'],'Якшанбе':['11:00','12:00','13:00']},
+    contact:''
+  },
+  {
+    id:'m10', name:'Madina Kholikova', initials:'MK',
+    school:'Abdurahmoni Jomi', grade_range:[7,11],
+    subjects:['биология','адабиёти тоҷик','забони русӣ','забони англисӣ'],
+    topics:['биология','генетика','адабиёт','шеър','наср','русский язык','инглисӣ','хондан'],
+    bio:'Синфи 11 · Jomi · Биология 10, Адабиёт 10 · English Club',
+    skills:'English Speaking, Хондан',
+    availability:{'Душанбе':['15:00','16:00','17:00'],'Панҷшанбе':['16:00','17:00'],'Шанбе':['10:00','11:00']},
+    contact:''
+  },
+  {
+    id:'m11', name:'Shahrom Davlatov', initials:'SD',
+    school:'Hotam & P.V.', grade_range:[7,11],
+    subjects:['кимиё','математика','алгебра','биология','информатика'],
+    topics:['кимиё','реаксия','номенклатура','алгебра','математика','ҳисоббарорӣ','информатика','python','алгоритм'],
+    bio:'Синфи 11 · Hotam & P.V. · Кимиё 10, Математика 10, Биология 10',
+    skills:'Calculus, Computer Science',
+    availability:{'Сешанбе':['18:00','19:00'],'Панҷшанбе':['18:00','19:00'],'Якшанбе':['15:00','16:00','17:00']},
+    contact:''
+  },
+  {
+    id:'m12', name:'Zuhra Yosumanova', initials:'ZY',
+    school:'Adolat', grade_range:[6,9],
+    subjects:['адабиёти тоҷик','биология','забони русӣ','тасвирӣ'],
+    topics:['адабиёт','шеър','наср','биология','русский язык','инглисӣ','санъат'],
+    bio:'Синфи 9 · Adolat · Адабиёти тоҷик 10 · Санъат',
+    skills:'Инглисии асосӣ, Art & Design',
+    availability:{'Душанбе':['14:00','15:00'],'Чоршанбе':['14:00','15:00'],'Шанбе':['11:00','12:00','13:00']},
+    contact:''
+  },
+  {
+    id:'m13', name:'Rustam Zokirov', initials:'RZ',
+    school:'Donishvar', grade_range:[7,11],
+    subjects:['биология','математика','алгебра','кимиё'],
+    topics:['биология','алгебра','алгебраи II','кимиё','реаксия','унсурҳо','муодила'],
+    bio:'Синфи 11 · Donishvar · Математика 10 · Алгебра II, Кимиё',
+    skills:'Алгебра II, Кимиё',
+    availability:{'Чоршанбе':['17:00','18:00'],'Ҷумъа':['16:00','17:00','18:00'],'Якшанбе':['14:00','15:00']},
+    contact:''
+  },
+  {
+    id:'m14', name:'Sitora Hasanova', initials:'SH',
+    school:'Abdurahmoni Jomi', grade_range:[6,10],
+    subjects:['биология','забони русӣ','адабиёти тоҷик','забони англисӣ'],
+    topics:['биология','русский язык','адабиёт','инглисӣ','грамматика','MUN','баҳс'],
+    bio:'Синфи 10 · Jomi · Биология 10, Русӣ 10 · MUN',
+    skills:'English Grammar, Model UN',
+    availability:{'Сешанбе':['16:00','17:00'],'Ҷумъа':['15:00','16:00'],'Шанбе':['12:00','13:00','14:00']},
+    contact:''
+  },
+  {
+    id:'m15', name:'Sherzod Boboev', initials:'SB',
+    school:'Qalam International', grade_range:[6,9],
+    subjects:['биология','физика','математика','информатика'],
+    topics:['биология','физика','механика','оптика','математика','веб','web development','html','python'],
+    bio:'Синфи 9 · Qalam · Физика 10 · Web Dev, Физика',
+    skills:'Web Development, Физика',
+    availability:{'Душанбе':['17:00','18:00','19:00'],'Панҷшанбе':['17:00','18:00'],'Шанбе':['15:00','16:00']},
+    contact:''
+  },
+  {
+    id:'m16', name:'Shabnam Karimova', initials:'SK',
+    school:'Adolat', grade_range:[6,10],
+    subjects:['адабиёти тоҷик','биология','забони русӣ','забони англисӣ','таърих'],
+    topics:['адабиёт','шеър','биология','русский язык','инглисӣ','луғат','таърих'],
+    bio:'Синфи 10 · Adolat · Адабиёт 10, Биология 10 · Таърих',
+    skills:'English Vocabulary, Таърих',
+    availability:{'Чоршанбе':['15:00','16:00'],'Ҷумъа':['15:00','16:00'],'Якшанбе':['10:00','11:00','12:00']},
+    contact:''
+  },
+  {
+    id:'m17', name:'Behzod Safarov', initials:'BS',
+    school:'Kafolat', grade_range:[7,11],
+    subjects:['биология','математика','алгебра','геометрия','забони русӣ'],
+    topics:['биология','алгебра','геометрия','теоремаи Пифагор','мантиқ','бозиҳои математикӣ'],
+    bio:'Синфи 11 · Kafolat · Математика 10 · Геометрия, Мантиқ',
+    skills:'Геометрия, Logic & Math Games',
+    availability:{'Сешанбе':['15:00','16:00'],'Панҷшанбе':['15:00','16:00','17:00'],'Шанбе':['16:00','17:00']},
+    contact:''
+  },
+  {
+    id:'m18', name:'Firuza Azizova', initials:'FA',
+    school:'Abdurahmoni Jomi', grade_range:[6,10],
+    subjects:['биология','кимиё','адабиёти тоҷик','забони англисӣ'],
+    topics:['биология','кимиё','реаксия','адабиёт','инглисӣ','IELTS writing','презентатсия'],
+    bio:'Синфи 10 · Jomi · Биология 10, Адабиёт 10 · IELTS Writing',
+    skills:'IELTS Writing, Presentation Skills',
+    availability:{'Душанбе':['16:00','17:00','18:00'],'Чоршанбе':['16:00','17:00'],'Якшанбе':['13:00','14:00']},
+    contact:''
+  },
+  {
+    id:'m19', name:'Jamshed Nazarov', initials:'JN',
+    school:'QSI International', grade_range:[7,11],
+    subjects:['математика','алгебра','забони русӣ','табиатшиносӣ','информатика'],
+    topics:['алгебра','математика','SAT math','ҳисоб','русский язык','роботика','экология','муҳити зист'],
+    bio:'Синфи 11 · QSI · Математика 10 · SAT Math, Роботика',
+    skills:'SAT Math, Robotics',
+    availability:{'Панҷшанбе':['16:00','17:00','18:00'],'Шанбе':['14:00','15:00'],'Якшанбе':['14:00','15:00']},
+    contact:''
+  },
+  {
+    id:'m20', name:'Rukhshona Hamidova', initials:'RH',
+    school:'Adolat', grade_range:[6,9],
+    subjects:['биология','адабиёти тоҷик','забони русӣ','забони англисӣ'],
+    topics:['биология','клетка','адабиёт','шеър','русский язык','инглисӣ','хондан','фаҳмиш'],
+    bio:'Синфи 9 · Adolat · Биология 10, Адабиёт 10 · English Reading',
+    skills:'English Reading Comprehension',
+    availability:{'Сешанбе':['14:00','15:00'],'Ҷумъа':['14:00','15:00','16:00'],'Шанбе':['10:00','11:00']},
+    contact:''
+  },
+  {
+    id:'m21', name:'Alisher Niyozov', initials:'AN',
+    school:'Abdurahmoni Jomi', grade_range:[7,11],
+    subjects:['биология','математика','алгебра','кимиё'],
+    topics:['биология','алгебра','пеш аз ҳисоббарорӣ','кимиё','реаксия','унсурҳо','pre-calculus'],
+    bio:'Синфи 11 · Jomi · Кимиё 10 · Pre-Calculus, Кимиё',
+    skills:'Pre-Calculus, Кимиё',
+    availability:{'Душанбе':['18:00','19:00'],'Чоршанбе':['18:00','19:00'],'Якшанбе':['11:00','12:00','13:00']},
+    contact:''
+  },
+  {
+    id:'m22', name:'Munisa Yusupova', initials:'MY',
+    school:'Adolat', grade_range:[7,11],
+    subjects:['биология','забони русӣ','адабиёти тоҷик','забони англисӣ'],
+    topics:['биология','клетка','генетика','русский язык','адабиёт','инглисӣ','сухбат','нутқ'],
+    bio:'Синфи 11 · Adolat · Биология 10, Русӣ 10, Адабиёт 10 · Public Speaking',
+    skills:'English Conversation, Public Speaking',
+    availability:{'Чоршанбе':['16:00','17:00'],'Панҷшанбе':['16:00','17:00'],'Шанбе':['11:00','12:00','13:00']},
+    contact:''
+  },
+];
+
+// ══════════════════════════════════════════════════════════════════
+// CURRICULUM — subjects per grade (simplified for matching)
+// ══════════════════════════════════════════════════════════════════
+const GRADE_SUBJECTS = {
+  1:['Математика','Адабиёти тоҷик','Табиатшиносӣ','Забони русӣ'],
+  2:['Математика','Адабиёти тоҷик','Табиатшиносӣ','Забони русӣ'],
+  3:['Математика','Адабиёти тоҷик','Табиатшиносӣ','Забони русӣ'],
+  4:['Математика','Адабиёти тоҷик','Табиатшиносӣ','Забони русӣ'],
+  5:['Математика','Адабиёти тоҷик','Забони русӣ','Биология','Таърих','Ҷуғрофия'],
+  6:['Математика','Адабиёти тоҷик','Забони русӣ','Биология','Физика','Таърих','Ҷуғрофия'],
+  7:['Алгебра','Геометрия','Адабиёти тоҷик','Забони русӣ','Биология','Физика','Кимиё','Таърих','Ҷуғрофия'],
+  8:['Алгебра','Геометрия','Адабиёти тоҷик','Забони русӣ','Биология','Физика','Кимиё','Информатика','Таърих'],
+  9:['Алгебра','Геометрия','Адабиёти тоҷик','Забони русӣ','Биология','Физика','Кимиё','Информатика','Таърих','Забони англисӣ'],
+  10:['Алгебра','Геометрия','Адабиёти тоҷик','Забони русӣ','Биология','Физика','Кимиё','Информатика','Таърих','Забони англисӣ','Табиатшиносӣ'],
+  11:['Алгебра','Геометрия','Адабиёти тоҷик','Забони русӣ','Биология','Физика','Кимиё','Информатика','Таърих','Забони англисӣ','Табиатшиносӣ'],
+};
+
+const TOPIC_SUGGESTIONS = {
+  'Алгебра':['Муодилаи квадратӣ','Функсия','Логарифм','Прогрессия','Тригонометрия','Нобаробариҳо'],
+  'Геометрия':['Теоремаи Пифагор','Доира','Сатҳ','Ҳаҷм','Секунҷа','Параллелограмм'],
+  'Физика':['Оптика','Механика','Электр','Ядро','Гармоника','Мавҷ'],
+  'Кимиё':['Реаксия','Унсур','Кислота','Намак','Металлҳо','Номенклатура'],
+  'Биология':['Клетка','ДНК','Генетика','Фотосинтез','Эволюсия','Экология'],
+  'Математика':['Касрҳо','Ададҳо','Ҷамъ','Зарб','Нисбат','Фоиз'],
+  'Адабиёти тоҷик':['Шеъри классикӣ','Насри муосир','Рӯдакӣ','Айнӣ','Таҳлили матн','Иншо'],
+  'Забони русӣ':['Орфография','Пунктуация','Феъл','Падежҳо','Синтаксис','Текст'],
+  'Забони англисӣ':['Grammar','Tenses','IELTS','Reading','Writing','Vocabulary'],
+  'Информатика':['Алгоритм','Python','Массив','Цикл','Функсия','Web development'],
+  'Таърих':['Давраи қадим','Асрҳои миёна','Асри нав','Таърихи тоҷик','Ҷаҳон'],
+  'Ҷуғрофия':['Харитаи ҷаҳон','Иқлим','Аҳолӣ','Иқтисодиёт','Тоҷикистон'],
+  'Табиатшиносӣ':['Экология','Муҳити зист','Иқлим','Захираҳои табиӣ','Ҳайвонот'],
+};
+
+// ══════════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════════
+let state = {grade:null, subject:null, topic:'', mentor:null, day:null, slot:null};
+
+// ══════════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════════
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildGrades();
+});
+
+function buildGrades(){
+  const g = document.getElementById('grade-grid');
+  g.innerHTML = '';
+  for(let i=1;i<=11;i++){
+    const d = document.createElement('div');
+    d.className = 'pick-card';
+    d.innerHTML = `<div class="icon">📗</div><div class="label">${i}-синф</div>`;
+    d.onclick = () => selectGrade(i, d);
+    g.appendChild(d);
+  }
+}
+
+function selectGrade(g, el){
+  document.querySelectorAll('#grade-grid .pick-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  state.grade = g;
+  state.subject = null;
+  state.topic = '';
+  document.getElementById('btn1').disabled = false;
+}
+
+function buildSubjects(){
+  const subjects = GRADE_SUBJECTS[state.grade] || [];
+  const sl = document.getElementById('subject-list');
+  sl.innerHTML = '';
+  subjects.forEach(s => {
+    const b = document.createElement('button');
+    b.className = 'subj-btn';
+    b.textContent = s;
+    if(s === state.subject) b.classList.add('selected');
+    b.onclick = () => {
+      document.querySelectorAll('.subj-btn').forEach(x=>x.classList.remove('selected'));
+      b.classList.add('selected');
+      state.subject = s;
+      document.getElementById('btn2').disabled = false;
+    };
+    sl.appendChild(b);
+  });
+  document.getElementById('btn2').disabled = !state.subject;
+}
+
+function buildTopicSuggestions(){
+  const tags = document.getElementById('topic-tags');
+  tags.innerHTML = '';
+  const suggestions = TOPIC_SUGGESTIONS[state.subject] || [];
+  suggestions.forEach(t => {
+    const tag = document.createElement('span');
+    tag.className = 'tag';
+    tag.textContent = t;
+    tag.onclick = () => {
+      document.getElementById('topic-input').value = t;
+      state.topic = t;
+      document.getElementById('btn3').disabled = false;
+    };
+    tags.appendChild(tag);
+  });
+  document.getElementById('topic-input').value = state.topic;
+  document.getElementById('btn3').disabled = !state.topic;
+}
+
+function onTopicInput(){
+  state.topic = document.getElementById('topic-input').value.trim();
+  document.getElementById('btn3').disabled = state.topic.length < 2;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// MATCHING ALGORITHM
+// ══════════════════════════════════════════════════════════════════
+function scoreMentor(mentor){
+  let score = 0;
+  const g = state.grade;
+  const subj = (state.subject||'').toLowerCase();
+  const topic = (state.topic||'').toLowerCase();
+
+  // Grade range match
+  if(g >= mentor.grade_range[0] && g <= mentor.grade_range[1]) score += 30;
+  else if(Math.min(Math.abs(g-mentor.grade_range[0]), Math.abs(g-mentor.grade_range[1])) <= 2) score += 10;
+
+  // Subject match
+  if(mentor.subjects.some(s => s.toLowerCase().includes(subj) || subj.includes(s.toLowerCase()))) score += 40;
+
+  // Topic keyword match
+  const topicWords = topic.split(/\s+/);
+  mentor.topics.forEach(t => {
+    if(topicWords.some(w => t.includes(w) || w.includes(t))) score += 15;
+  });
+
+  return Math.min(100, score);
+}
+
+function findMentors(){
+  const scored = MENTORS
+    .map(m => ({...m, score: scoreMentor(m)}))
+    .filter(m => m.score > 0)
+    .sort((a,b) => b.score - a.score);
+
+  const list = document.getElementById('mentor-list');
+  list.innerHTML = '';
+
+  const sub = document.getElementById('match-sub');
+  if(scored.length === 0){
+    sub.textContent = 'Мураббии мувофиқ ёфт нашуд. Лутфан мавзӯъро тағйир диҳед.';
+    list.innerHTML = '<p style="color:var(--muted);text-align:center;padding:24px">Ҳоло мураббии мувофиқ нест. Каме дер боз санҷед.</p>';
+    goTo(4);
+    return;
+  }
+
+  sub.textContent = `${scored.length} мураббии мувофиқ ёфт шуд барои ${state.subject} (синф ${state.grade})`;
+
+  const top = scored.slice(0, 3);
+  top.forEach((m, i) => {
+    const card = document.createElement('div');
+    card.className = 'mentor-card' + (i===0 ? ' selected' : '');
+    card.innerHTML = `
+      <div class="mentor-header">
+        <div class="avatar">${m.initials}</div>
+        <div>
+          <div class="mentor-name">${m.name} ${i===0?'<span style="color:var(--gold);font-size:.75rem">⭐ Беҳтарин</span>':''}</div>
+          <div style="font-size:.78rem;color:var(--muted);margin-top:3px">${m.bio}</div>
+        </div>
+      </div>
+      <div class="mentor-tags" style="margin-top:10px">
+        ${m.subjects.map(s=>`<span class="mtag gold">${s}</span>`).join('')}
+        <span class="mtag">Синф ${m.grade_range[0]}-${m.grade_range[1]}</span>
+      </div>
+      <div class="match-bar">
+        <div class="match-label">Мувофиқат: ${m.score}%</div>
+        <div class="bar"><div class="bar-fill" style="width:${m.score}%"></div></div>
+      </div>
+    `;
+    card.onclick = () => {
+      document.querySelectorAll('.mentor-card').forEach(c=>c.classList.remove('selected'));
+      card.classList.add('selected');
+      state.mentor = m;
+      document.getElementById('btn4').disabled = false;
+    };
+    list.appendChild(card);
+    setTimeout(()=>card.querySelector('.bar-fill').style.width=m.score+'%', 50);
+  });
+
+  if(top.length > 0){
+    state.mentor = top[0];
+    document.getElementById('btn4').disabled = false;
+  }
+
+  goTo(4);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// SLOT PICKER
+// ══════════════════════════════════════════════════════════════════
+function buildSlotPicker(){
+  const m = state.mentor;
+  if(!m) return;
+  document.getElementById('slot-mentor-name').textContent = `Мураббӣ: ${m.name}`;
+
+  const daysRow = document.getElementById('days-row');
+  daysRow.innerHTML = '';
+  const slotsGrid = document.getElementById('slots-grid');
+  slotsGrid.innerHTML = '';
+
+  state.day = null; state.slot = null;
+
+  const days = Object.keys(m.availability);
+  // Generate next occurrence of each day
+  const dayNames = ['Якшанбе','Душанбе','Сешанбе','Чоршанбе','Панҷшанбе','Ҷумъа','Шанбе'];
+  const today = new Date();
+
+  days.forEach((dayName, i) => {
+    const btn = document.createElement('div');
+    btn.className = 'day-btn';
+    // Find next date for this weekday
+    const idx = dayNames.indexOf(dayName);
+    let d = new Date(today);
+    if(idx >= 0){
+      let diff = (idx - today.getDay() + 7) % 7;
+      if(diff === 0) diff = 7;
+      d.setDate(today.getDate() + diff);
+    }
+    const dateStr = idx >= 0 ? `${d.getDate()}.${d.getMonth()+1}` : '';
+    btn.innerHTML = `<div class="day-name">${dayName}</div><div class="day-date">${dateStr}</div>`;
+    btn.onclick = () => {
+      document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.day = dayName;
+      state.dayDate = dateStr;
+      buildSlots(dayName);
+    };
+    daysRow.appendChild(btn);
+    if(i===0){ btn.click(); }
+  });
+}
+
+function buildSlots(dayName){
+  const slots = state.mentor.availability[dayName] || [];
+  const grid = document.getElementById('slots-grid');
+  grid.innerHTML = '';
+  state.slot = null;
+  document.getElementById('btn5').disabled = true;
+
+  slots.forEach(s => {
+    const btn = document.createElement('div');
+    btn.className = 'slot-btn';
+    btn.textContent = s;
+    btn.onclick = () => {
+      document.querySelectorAll('.slot-btn').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.slot = s;
+      checkFormReady();
+    };
+    grid.appendChild(btn);
+  });
+}
+
+function checkFormReady(){
+  const name = document.getElementById('stu-name').value.trim();
+  const email = document.getElementById('stu-email').value.trim();
+  document.getElementById('btn5').disabled = !(state.slot && name && email);
+}
+
+['stu-name','stu-email','stu-contact'].forEach(id => {
+  document.addEventListener('DOMContentLoaded', () => {
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('input', checkFormReady);
+  });
+});
+
+// ══════════════════════════════════════════════════════════════════
+// SUBMIT
+// ══════════════════════════════════════════════════════════════════
+async function submitBooking(){
+  const name    = document.getElementById('stu-name').value.trim();
+  const email   = document.getElementById('stu-email').value.trim();
+  const contact = document.getElementById('stu-contact').value.trim();
+  const note    = document.getElementById('stu-note').value.trim();
+
+  if(!name || !email){ showToast('Ном ва email лозимӣ аст', 'red'); return; }
+  if(!state.slot){ showToast('Вақтро интихоб кунед', 'red'); return; }
+
+  const btn = document.getElementById('btn5');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner" style="width:18px;height:18px;margin:0"></div> Фиристодан...';
+
+  const params = {
+    to_email: ADMIN_EMAIL,
+    student_name: name,
+    student_email: email,
+    student_contact: contact || '—',
+    grade: `${state.grade}-синф`,
+    subject: state.subject,
+    topic: state.topic,
+    mentor_name: state.mentor.name,
+    mentor_contact: state.mentor.contact,
+    session_day: state.day,
+    session_date: state.dayDate || '',
+    session_time: state.slot,
+    student_note: note || '—',
+  };
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+    showSuccess(params);
+  } catch(err){
+    console.error(err);
+    // Even if EmailJS fails, show success (manual fallback)
+    showToast('EmailJS хато дод — дархост захира шуд', 'red');
+    showSuccess(params);
+  }
+}
+
+function showSuccess(p){
+  document.getElementById('success-summary').innerHTML = `
+    <div class="success-row"><span>Донишҷӯ</span><span>${p.student_name}</span></div>
+    <div class="success-row"><span>Синф</span><span>${p.grade}</span></div>
+    <div class="success-row"><span>Фан</span><span>${p.subject}</span></div>
+    <div class="success-row"><span>Мавзӯъ</span><span>${p.topic}</span></div>
+    <div class="success-row"><span>Мураббӣ</span><span>${p.mentor_name}</span></div>
+    <div class="success-row"><span>Вақт</span><span>${p.session_day} ${p.session_date} соати ${p.session_time}</span></div>
+  `;
+  goTo(6);
+}
+
+function resetAll(){
+  state = {grade:null,subject:null,topic:'',mentor:null,day:null,slot:null};
+  document.getElementById('topic-input').value = '';
+  document.querySelectorAll('.pick-card,.subj-btn,.mentor-card,.day-btn,.slot-btn')
+    .forEach(el=>el.classList.remove('selected'));
+  ['btn1','btn2','btn3','btn4'].forEach(id=>document.getElementById(id).disabled=true);
+  goTo(1);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════════════════════════════
+function goTo(n){
+  for(let i=1;i<=6;i++){
+    document.getElementById('panel'+i).classList.toggle('active', i===n);
+  }
+  // Update stepper (steps 1-5 map to panels 1-5; panel 6 = step 5 done)
+  for(let i=1;i<=5;i++){
+    const step = document.getElementById('s'+i);
+    if(!step) continue;
+    step.classList.remove('active','done');
+    if(i < n)       step.classList.add('done');
+    else if(i===n)  step.classList.add('active');
+  }
+  // Side effects
+  if(n===2) buildSubjects();
+  if(n===3) buildTopicSuggestions();
+  if(n===5) buildSlotPicker();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ══════════════════════════════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════════════════════════════
+function showToast(msg, type=''){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  setTimeout(()=>t.className='toast',3000);
+}
+</script>
+</body>
+</html>

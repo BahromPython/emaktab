@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>еМактаб — Интернет нест</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:#0d1117;color:#fff;
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:24px;text-align:center;
+}
+.card{max-width:440px;width:100%;}
+.logo{font-size:72px;margin-bottom:24px;filter:drop-shadow(0 0 24px rgba(200,150,12,.5));}
+h1{
+  font-size:28px;font-weight:800;margin-bottom:12px;
+  background:linear-gradient(135deg,#c8960c,#fdd76a);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.sub{font-size:16px;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:36px;}
+.tip{
+  background:rgba(200,150,12,.08);border:1px solid rgba(200,150,12,.2);
+  border-radius:12px;padding:18px 20px;margin-bottom:24px;
+  font-size:14px;color:rgba(255,255,255,.7);line-height:1.6;text-align:left;
+}
+.tip strong{color:#fdd76a;display:block;margin-bottom:6px;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,#c8960c,#e8b830);
+  color:#0d1117;font-weight:700;font-size:15px;
+  padding:13px 28px;border-radius:10px;text-decoration:none;
+  cursor:pointer;border:none;font-family:inherit;
+  transition:all .2s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,150,12,.4);}
+.status{margin-top:20px;font-size:13px;color:rgba(255,255,255,.3);}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">📚</div>
+  <h1>Интернет нест</h1>
+  <p class="sub">Шумо ҳоло пайваст нестед. Барои истифодаи пурраи еМактаб интернет лозим аст.</p>
+  <div class="tip">
+    <strong>💡 Маслиҳат</strong>
+    Барои истифодаи еМактаб бе интернет, онро ҳамчун барнома насб кунед. Дар браузери худ "Ба экрани асосӣ илова кун" ё "Install app" -ро интихоб кунед.
+  </div>
+  <button class="btn" onclick="location.href='/eMaktab_lms_v2.html'">🔄 Дубора кӯшиш кун</button>
+  <div class="status" id="status">Пайвастшавиро интизор...</div>
+</div>
+<script>
+// Auto-retry when connection restored
+window.addEventListener('online', () => { location.reload(); });
+setInterval(() => {
+  fetch('/manifest.json', {cache:'no-store'}).then(() => location.reload()).catch(() => {});
+}, 8000);
+</script>
+</body>
+</html>

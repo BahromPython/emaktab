@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mentor Portal | eMaktab</title>
+<style>
+:root{
+  --bg:#0f0f0f;--card:#1a1a1a;--card2:#222;--border:#2a2a2a;
+  --gold:#c9a84c;--gold2:#e8c56a;--text:#e8e8e8;--muted:#888;
+  --green:#4caf50;--red:#e05252;--radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+nav{display:flex;align-items:center;gap:10px;padding:14px 24px;border-bottom:1px solid var(--border);background:#111}
+nav .logo{color:var(--gold);font-weight:700;font-size:1rem}
+nav .tag{background:#1e1800;color:var(--gold);font-size:.7rem;padding:3px 8px;border-radius:20px;border:1px solid var(--gold)}
+
+.container{max-width:640px;margin:0 auto;padding:32px 16px 80px}
+
+/* LOGIN */
+#login-screen{text-align:center;padding-top:48px}
+#login-screen h1{font-size:1.6rem;color:var(--gold2);margin-bottom:8px}
+#login-screen p{color:var(--muted);margin-bottom:32px;font-size:.9rem}
+.login-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;text-align:left;max-width:380px;margin:0 auto}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:6px}
+.form-group select,.form-group input{
+  width:100%;background:var(--card2);border:2px solid var(--border);border-radius:9px;
+  padding:11px 13px;color:var(--text);font-size:.9rem;outline:none;transition:.2s;font-family:inherit}
+.form-group select:focus,.form-group input:focus{border-color:var(--gold)}
+.form-group select option{background:#222}
+.error-msg{color:var(--red);font-size:.82rem;margin-top:8px;display:none}
+
+/* DASHBOARD */
+#dashboard{display:none}
+.profile-header{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:20px;display:flex;align-items:center;gap:16px}
+.avatar{width:56px;height:56px;border-radius:50%;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;flex-shrink:0}
+.profile-name{font-size:1.1rem;font-weight:700}
+.profile-meta{font-size:.8rem;color:var(--muted);margin-top:3px}
+
+.section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.section-title{font-size:.9rem;font-weight:700;color:var(--gold2);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+
+/* SUBJECTS DISPLAY */
+.tags-row{display:flex;flex-wrap:wrap;gap:8px}
+.tag-pill{background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:.78rem;color:var(--muted)}
+.tag-pill.gold{border-color:var(--gold);color:var(--gold)}
+
+/* AVAILABILITY EDITOR */
+.day-block{margin-bottom:14px}
+.day-label{font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.slots-wrap{display:flex;flex-wrap:wrap;gap:6px}
+.slot-toggle{background:var(--card2);border:2px solid var(--border);border-radius:8px;padding:6px 12px;font-size:.8rem;cursor:pointer;transition:.2s;user-select:none}
+.slot-toggle.on{border-color:var(--green);color:var(--green);background:#0d1f0d}
+.slot-toggle:hover{border-color:var(--gold)}
+.add-slot-row{display:flex;gap:8px;margin-top:8px}
+.add-slot-row input{background:var(--card2);border:2px solid var(--border);border-radius:8px;padding:6px 10px;color:var(--text);font-size:.8rem;width:90px;outline:none}
+.add-slot-row input:focus{border-color:var(--gold)}
+.add-slot-row button{background:transparent;border:2px solid var(--border);border-radius:8px;padding:6px 12px;color:var(--muted);cursor:pointer;font-size:.8rem;transition:.2s}
+.add-slot-row button:hover{border-color:var(--gold);color:var(--gold)}
+
+/* CONTACT */
+.contact-row{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.contact-row label{font-size:.8rem;color:var(--muted);width:90px;flex-shrink:0}
+.contact-row input{flex:1;background:var(--card2);border:2px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:.85rem;outline:none;transition:.2s;font-family:inherit}
+.contact-row input:focus{border-color:var(--gold)}
+
+/* STATUS NOTE */
+.status-row{display:flex;align-items:center;gap:10px;padding:12px;background:var(--card2);border-radius:9px;font-size:.82rem}
+.status-dot{width:10px;height:10px;border-radius:50%;background:var(--green);flex-shrink:0}
+.status-dot.off{background:var(--muted)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:9px;border:none;cursor:pointer;font-size:.88rem;font-weight:600;transition:.2s}
+.btn-gold{background:var(--gold);color:#000}
+.btn-gold:hover{background:var(--gold2)}
+.btn-ghost{background:transparent;color:var(--muted);border:2px solid var(--border)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-row{display:flex;gap:10px;margin-top:20px;justify-content:space-between}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* SAVE BAR */
+.save-bar{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:100}
+.save-bar-text{font-size:.82rem;color:var(--muted)}
+.save-bar-text span{color:var(--gold)}
+
+/* TOAST */
+.toast{position:fixed;bottom:72px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:10px 18px;font-size:.82rem;opacity:0;transition:.3s;z-index:200;white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.green{border-color:var(--green);color:var(--green)}
+.toast.red{border-color:var(--red);color:var(--red)}
+
+.spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">📚 eMaktab</span>
+  <span class="tag">Mentor Portal</span>
+  <span style="flex:1"></span>
+  <button id="logout-btn" class="btn btn-ghost" style="padding:6px 14px;font-size:.78rem;display:none" onclick="logout()">Sign out</button>
+</nav>
+
+<!-- LOGIN -->
+<div class="container">
+<div id="login-screen">
+  <h1>🎓 Mentor Portal</h1>
+  <p>Select your name and enter your access code to manage your profile.</p>
+  <div class="login-card">
+    <div class="form-group">
+      <label>Your name</label>
+      <select id="mentor-select" onchange="onMentorSelect()">
+        <option value="">— Choose your name —</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Access code (PIN)</label>
+      <input type="password" id="pin-input" placeholder="4-digit code" maxlength="4" inputmode="numeric" onkeyup="if(event.key==='Enter')doLogin()">
+      <div class="error-msg" id="pin-error">Incorrect code. Try again.</div>
+    </div>
+    <button class="btn btn-gold" style="width:100%;justify-content:center;margin-top:4px" onclick="doLogin()">Sign in →</button>
+    <p style="font-size:.75rem;color:var(--muted);margin-top:14px;text-align:center">Contact Bahrom if you don't have your code: bahromasurov708@gmail.com</p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="profile-header" id="profile-header"></div>
+
+  <!-- STATUS -->
+  <div class="section">
+    <div class="section-title">🟢 Availability Status</div>
+    <div class="status-row">
+      <div class="status-dot" id="status-dot"></div>
+      <div style="flex:1">
+        <div id="status-label" style="font-weight:600;font-size:.88rem"></div>
+        <div style="font-size:.75rem;color:var(--muted);margin-top:2px">Students can only book you when you're active</div>
+      </div>
+      <button class="btn btn-ghost" style="padding:7px 14px;font-size:.78rem" id="status-toggle-btn" onclick="toggleStatus()"></button>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section">
+    <div class="section-title">📬 Contact & Meeting Info</div>
+    <div class="contact-row">
+      <label>Telegram</label>
+      <input id="c-telegram" type="text" placeholder="@your_username">
+    </div>
+    <div class="contact-row">
+      <label>Phone</label>
+      <input id="c-phone" type="text" placeholder="+992 XX XXX XXXX">
+    </div>
+    <div class="contact-row">
+      <label>Zoom link</label>
+      <input id="c-zoom" type="text" placeholder="https://zoom.us/j/...">
+    </div>
+    <div class="contact-row">
+      <label>Email</label>
+      <input id="c-email" type="email" placeholder="your@email.com">
+    </div>
+  </div>
+
+  <!-- SUBJECTS -->
+  <div class="section">
+    <div class="section-title">📚 Your Subjects</div>
+    <div class="tags-row" id="subjects-display"></div>
+    <p style="font-size:.75rem;color:var(--muted);margin-top:10px">To change subjects, contact Bahrom.</p>
+  </div>
+
+  <!-- AVAILABILITY -->
+  <div class="section">
+    <div class="section-title">📅 Weekly Schedule</div>
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:14px">Click a time slot to toggle it on/off. Add custom slots with the + button.</p>
+    <div id="availability-editor"></div>
+  </div>
+
+  <!-- BIO -->
+  <div class="section">
+    <div class="section-title">✏️ Short Bio</div>
+    <textarea id="bio-input" rows="3" style="width:100%;background:var(--card2);border:2px solid var(--border);border-radius:9px;padding:11px 13px;color:var(--text);font-size:.85rem;outline:none;font-family:inherit;resize:vertical;transition:.2s" placeholder="One or two sentences about yourself and what you're good at..."></textarea>
+  </div>
+
+  <div style="height:70px"></div>
+</div>
+</div><!-- /container -->
+
+<!-- SAVE BAR -->
+<div class="save-bar" id="save-bar" style="display:none">
+  <div class="save-bar-text">Logged in as <span id="save-bar-name"></span></div>
+  <button class="btn btn-gold" id="save-btn" onclick="saveChanges()">💾 Save changes</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+// ══════════════════════════════════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════════════════════════════════
+const EMAILJS_PUBLIC_KEY  = 'uG3fw0y0YR7LurOUY';
+const EMAILJS_SERVICE_ID  = 'service_vu43pmj';
+const EMAILJS_TEMPLATE_ID = 'template_4qo1yjo';
+const ADMIN_EMAIL = 'bahromasurov708@gmail.com';
+
+// ══════════════════════════════════════════════════════════════════
+// MENTOR DIRECTORY — id, name, initials, PIN, subjects, default availability
+// PIN should be changed to something private before sharing links
+// ══════════════════════════════════════════════════════════════════
+const MENTOR_DIR = [
+  {id:'m1',  name:'Farhod Rahimov',     initials:'FR', pin:'1101',
+   school:'Abdurahmoni Jomi', grade:11,
+   subjects:['Biology','Russian','Math'],
+   defaultAvail:{'Душанбе':['15:00','16:00'],'Чоршанбе':['15:00','16:00'],'Шанбе':['14:00','15:00','16:00']},
+   defaultTelegram:'@farhod_rahimov', defaultPhone:'+992 90 100 1122', defaultZoom:'https://zoom.us/j/1001122001', defaultEmail:'farhod.r@example.tj',
+   defaultBio:'Донишҷӯи фаъоли синфи 11 бо шавқи баланд ба биология ва риёзиёт, омода барои кӯмак дар SAT Math ва санъати суханварӣ.'},
+  {id:'m2',  name:'Nigina Sharipova',   initials:'NS', pin:'1102',
+   school:'Hotam & P.V.', grade:11,
+   subjects:['Chemistry','Biology','Tajik Literature'],
+   defaultAvail:{'Сешанбе':['16:00','17:00'],'Панҷшанбе':['16:00','17:00'],'Якшанбе':['10:00','11:00','12:00']},
+   defaultTelegram:'@nigina_sharipova', defaultPhone:'+992 90 200 2233', defaultZoom:'https://zoom.us/j/2002233002', defaultEmail:'nigina.s@example.tj',
+   defaultBio:'Иштирокчии олимпиадаҳо аз химия ва физика, донандаи аълои фанҳои дақиқ.'},
+  {id:'m3',  name:'Somon Mirzoev',      initials:'SM', pin:'0903',
+   school:'QSI International', grade:9,
+   subjects:['Biology','Russian','English'],
+   defaultAvail:{'Душанбе':['17:00','18:00'],'Ҷумъа':['16:00','17:00','18:00'],'Шанбе':['11:00','12:00']},
+   defaultTelegram:'@somon_mirzoev', defaultPhone:'+992 90 300 3344', defaultZoom:'https://zoom.us/j/3003344003', defaultEmail:'somon.m@example.tj',
+   defaultBio:'Шавқманд ба забонҳо ва эссенависӣ бо забони англисӣ ва биология.'},
+  {id:'m4',  name:'Tahmina Ismoilova',  initials:'TI', pin:'1104',
+   school:'Kafolat', grade:11,
+   subjects:['Biology','Tajik Literature','Chemistry'],
+   defaultAvail:{'Чоршанбе':['16:00','17:00','18:00'],'Шанбе':['15:00','16:00'],'Якшанбе':['15:00','16:00']},
+   defaultTelegram:'@tahmina_ismoilova', defaultPhone:'+992 90 400 4455', defaultZoom:'https://zoom.us/j/4004455004', defaultEmail:'tahmina.i@example.tj',
+   defaultBio:'Мутахассиси омодагӣ ба IELTS ва грамматикаи англисӣ бо натиҷаҳои баланд дар биология.'},
+  {id:'m5',  name:'Anushervon Qodirov', initials:'AQ', pin:'1005',
+   school:'Adolat', grade:10,
+   subjects:['Biology','Russian','Physics'],
+   defaultAvail:{'Сешанбе':['15:00','16:00','17:00'],'Панҷшанбе':['15:00','16:00'],'Шанбе':['10:00','11:00']},
+   defaultTelegram:'@anushervon_q', defaultPhone:'+992 90 500 5566', defaultZoom:'https://zoom.us/j/5005566005', defaultEmail:'anushervon.q@example.tj',
+   defaultBio:'Донандаи хуби физика ва алгебра, омода барои кӯмаки дарсӣ ба ҳамсолон.'},
+  {id:'m6',  name:'Parvina Rasulova',   initials:'PR', pin:'0906',
+   school:'Abdurahmoni Jomi', grade:9,
+   subjects:['Tajik Literature','Biology','Russian'],
+   defaultAvail:{'Душанбе':['16:00','17:00'],'Чоршанбе':['16:00','17:00'],'Якшанбе':['14:00','15:00','16:00']},
+   defaultTelegram:'@parvina_rasulova', defaultPhone:'+992 90 600 6677', defaultZoom:'https://zoom.us/j/6006677006', defaultEmail:'parvina.r@example.tj',
+   defaultBio:'Шавқманд ба адабиёт ва забонҳои хориҷӣ (англисӣ ва французӣ).'},
+  {id:'m7',  name:'Dilshod Nabiev',     initials:'DN', pin:'1007',
+   school:'Adolat', grade:10,
+   subjects:['Biology','Math','Physics'],
+   defaultAvail:{'Душанбе':['18:00','19:00'],'Ҷумъа':['17:00','18:00','19:00'],'Шанбе':['16:00','17:00']},
+   defaultTelegram:'@dilshod_nabiev', defaultPhone:'+992 90 700 7788', defaultZoom:'https://zoom.us/j/7007788007', defaultEmail:'dilshod.n@example.tj',
+   defaultBio:'Барномасози ҷавон дар Python ва мутахассиси геометрияву риёзиёт.'},
+  {id:'m8',  name:'Malika Umarova',     initials:'MU', pin:'1108',
+   school:'Qalam International', grade:11,
+   subjects:['Biology','Russian','Tajik Literature'],
+   defaultAvail:{'Сешанбе':['17:00','18:00'],'Панҷшанбе':['17:00','18:00'],'Шанбе':['13:00','14:00','15:00']},
+   defaultTelegram:'@malika_umarova', defaultPhone:'+992 90 800 8899', defaultZoom:'https://zoom.us/j/8008899008', defaultEmail:'malika.u@example.tj',
+   defaultBio:'Мураббии забони англисӣ ва суҳбати озод (IELTS Speaking).'},
+  {id:'m9',  name:'Jahongir Saidov',    initials:'JS', pin:'0909',
+   school:'Donishvar', grade:9,
+   subjects:['Chemistry','Biology','Math'],
+   defaultAvail:{'Чоршанбе':['15:00','16:00'],'Ҷумъа':['15:00','16:00'],'Якшанбе':['11:00','12:00','13:00']},
+   defaultTelegram:'@jahongir_saidov', defaultPhone:'+992 90 900 9900', defaultZoom:'https://zoom.us/j/9009900009', defaultEmail:'jahongir.s@example.tj',
+   defaultBio:'Дорои маҳорати баланди ҳисоби шифоҳӣ (mental math) ва химия.'},
+  {id:'m10', name:'Madina Kholikova',   initials:'MK', pin:'1110',
+   school:'Abdurahmoni Jomi', grade:11,
+   subjects:['Biology','Tajik Literature','Russian'],
+   defaultAvail:{'Душанбе':['15:00','16:00','17:00'],'Панҷшанбе':['16:00','17:00'],'Шанбе':['10:00','11:00']},
+   defaultTelegram:'@madina_kholikova', defaultPhone:'+992 91 111 2233', defaultZoom:'https://zoom.us/j/1112233010', defaultEmail:'madina.k@example.tj',
+   defaultBio:'Ташкилкунандаи клуби суҳбатии англисӣ ва ошиқи адабиёти тоҷик.'},
+  {id:'m11', name:'Shahrom Davlatov',   initials:'SD', pin:'1111',
+   school:'Hotam & P.V.', grade:11,
+   subjects:['Chemistry','Math','Biology'],
+   defaultAvail:{'Сешанбе':['18:00','19:00'],'Панҷшанбе':['18:00','19:00'],'Якшанбе':['15:00','16:00','17:00']},
+   defaultTelegram:'@shahrom_davlatov', defaultPhone:'+992 91 222 3344', defaultZoom:'https://zoom.us/j/2223344011', defaultEmail:'shahrom.d@example.tj',
+   defaultBio:'Олими оянда дар соҳаи биоинформатика, мутахассиси высшая математика ва барномасозӣ.'},
+  {id:'m12', name:'Zuhra Yosumanova',   initials:'ZY', pin:'0912',
+   school:'Adolat', grade:9,
+   subjects:['Tajik Literature','Biology','Russian'],
+   defaultAvail:{'Душанбе':['14:00','15:00'],'Чоршанбе':['14:00','15:00'],'Шанбе':['11:00','12:00','13:00']},
+   defaultTelegram:'@zuhra_yosumanova', defaultPhone:'+992 91 333 4455', defaultZoom:'https://zoom.us/j/3334455012', defaultEmail:'zuhra.y@example.tj',
+   defaultBio:'Эҷодкор ва рассом, кӯмакрасон дар омӯзиши забони англисии ибтидоӣ.'},
+  {id:'m13', name:'Rustam Zokirov',     initials:'RZ', pin:'1113',
+   school:'Donishvar', grade:11,
+   subjects:['Biology','Math','Chemistry'],
+   defaultAvail:{'Чоршанбе':['17:00','18:00'],'Ҷумъа':['16:00','17:00','18:00'],'Якшанбе':['14:00','15:00']},
+   defaultTelegram:'@rustam_zokirov', defaultPhone:'+992 91 444 5566', defaultZoom:'https://zoom.us/j/4445566013', defaultEmail:'rustam.z@example.tj',
+   defaultBio:'Мутахассиси алгебра ва химия, омода барои фаҳмонидани мавзӯъҳои мураккаб.'},
+  {id:'m14', name:'Sitora Hasanova',    initials:'SH', pin:'1014',
+   school:'Abdurahmoni Jomi', grade:10,
+   subjects:['Biology','Russian','Tajik Literature'],
+   defaultAvail:{'Сешанбе':['16:00','17:00'],'Ҷумъа':['15:00','16:00'],'Шанбе':['12:00','13:00','14:00']},
+   defaultTelegram:'@sitora_hasanova', defaultPhone:'+992 91 555 6677', defaultZoom:'https://zoom.us/j/5556677014', defaultEmail:'sitora.h@example.tj',
+   defaultBio:'Иштирокчии фаъоли конфронсҳои MUN (Model UN) ва мутахассиси грамматикаи англисӣ.'},
+  {id:'m15', name:'Sherzod Boboev',     initials:'SB', pin:'0915',
+   school:'Qalam International', grade:9,
+   subjects:['Biology','Physics','Math'],
+   defaultAvail:{'Душанбе':['17:00','18:00','19:00'],'Панҷшанбе':['17:00','18:00'],'Шанбе':['15:00','16:00']},
+   defaultTelegram:'@sherzod_boboev', defaultPhone:'+992 91 666 7788', defaultZoom:'https://zoom.us/j/6667788015', defaultEmail:'sherzod.b@example.tj',
+   defaultBio:'Шавқманди веб-барномасозӣ ва физика.'},
+  {id:'m16', name:'Shabnam Karimova',   initials:'SK', pin:'1016',
+   school:'Adolat', grade:10,
+   subjects:['Tajik Literature','Biology','Russian'],
+   defaultAvail:{'Чоршанбе':['15:00','16:00'],'Ҷумъа':['15:00','16:00'],'Якшанбе':['10:00','11:00','12:00']},
+   defaultTelegram:'@shabnam_karimova', defaultPhone:'+992 91 777 8899', defaultZoom:'https://zoom.us/j/7778899016', defaultEmail:'shabnam.k@example.tj',
+   defaultBio:'Мутахассиси луғати англисӣ ва таърихи адабиёт.'},
+  {id:'m17', name:'Behzod Safarov',     initials:'BS', pin:'1117',
+   school:'Kafolat', grade:11,
+   subjects:['Biology','Math','Russian'],
+   defaultAvail:{'Сешанбе':['15:00','16:00'],'Панҷшанбе':['15:00','16:00','17:00'],'Шанбе':['16:00','17:00']},
+   defaultTelegram:'@behzod_safarov', defaultPhone:'+992 91 888 9900', defaultZoom:'https://zoom.us/j/8889900017', defaultEmail:'behzod.s@example.tj',
+   defaultBio:'Шавқманд ба бозиҳои мантиқӣ ва геометрия.'},
+  {id:'m18', name:'Firuza Azizova',     initials:'FA', pin:'1018',
+   school:'Abdurahmoni Jomi', grade:10,
+   subjects:['Biology','Chemistry','Tajik Literature'],
+   defaultAvail:{'Душанбе':['16:00','17:00','18:00'],'Чоршанбе':['16:00','17:00'],'Якшанбе':['13:00','14:00']},
+   defaultTelegram:'@firuza_azizova', defaultPhone:'+992 91 999 0011', defaultZoom:'https://zoom.us/j/9990011018', defaultEmail:'firuza.a@example.tj',
+   defaultBio:'Мутахассиси бахши навиштори IELTS (IELTS Writing) ва тақдими презентатсияҳо.'},
+  {id:'m19', name:'Jamshed Nazarov',    initials:'JN', pin:'1119',
+   school:'QSI International', grade:11,
+   subjects:['Math','Russian','Environmental Science'],
+   defaultAvail:{'Панҷшанбе':['16:00','17:00','18:00'],'Шанбе':['14:00','15:00'],'Якшанбе':['14:00','15:00']},
+   defaultTelegram:'@jamshed_nazarov', defaultPhone:'+992 92 000 1122', defaultZoom:'https://zoom.us/j/0001122019', defaultEmail:'jamshed.n@example.tj',
+   defaultBio:'Иштирокчии клуби робототехника ва мутахассиси SAT Math.'},
+  {id:'m20', name:'Rukhshona Hamidova', initials:'RH', pin:'0920',
+   school:'Adolat', grade:9,
+   subjects:['Biology','Tajik Literature','Russian'],
+   defaultAvail:{'Сешанбе':['14:00','15:00'],'Ҷумъа':['14:00','15:00','16:00'],'Шанбе':['10:00','11:00']},
+   defaultTelegram:'@rukhshona_h', defaultPhone:'+992 92 111 2233', defaultZoom:'https://zoom.us/j/1112233020', defaultEmail:'rukhshona.h@example.tj',
+   defaultBio:'Кӯмакрасон дар мутолиа ва фаҳмиши матни англисӣ (Reading Comprehension).'},
+  {id:'m21', name:'Alisher Niyozov',    initials:'AN', pin:'1121',
+   school:'Abdurahmoni Jomi', grade:11,
+   subjects:['Biology','Math','Chemistry'],
+   defaultAvail:{'Душанбе':['18:00','19:00'],'Чоршанбе':['18:00','19:00'],'Якшанбе':['11:00','12:00','13:00']},
+   defaultTelegram:'@alisher_niyozov', defaultPhone:'+992 92 222 3344', defaultZoom:'https://zoom.us/j/2223344021', defaultEmail:'alisher.n@example.tj',
+   defaultBio:'Мутахассиси Pre-Calculus ва химия.'},
+  {id:'m22', name:'Munisa Yusupova',    initials:'MY', pin:'1122',
+   school:'Adolat', grade:11,
+   subjects:['Biology','Russian','Tajik Literature'],
+   defaultAvail:{'Чоршанбе':['16:00','17:00'],'Панҷшанбе':['16:00','17:00'],'Шанбе':['11:00','12:00','13:00']},
+   defaultTelegram:'@munisa_yusupova', defaultPhone:'+992 92 333 4455', defaultZoom:'https://zoom.us/j/3334455022', defaultEmail:'munisa.y@example.tj',
+   defaultBio:'Мутахассиси суҳбати озоди англисӣ (English Conversation) ва ораторӣ.'},
+];
+
+const ALL_DAYS = ['Душанбе','Сешанбе','Чоршанбе','Панҷшанбе','Ҷумъа','Шанбе','Якшанбе'];
+const COMMON_SLOTS = ['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00'];
+
+// ══════════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════════
+let currentMentor = null;
+let profile = {};  // editable copy
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+// ── BUILD LOGIN DROPDOWN ──
+document.addEventListener('DOMContentLoaded', () => {
+  const sel = document.getElementById('mentor-select');
+  MENTOR_DIR.forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m.id;
+    opt.textContent = `${m.name} (Grade ${m.grade})`;
+    sel.appendChild(opt);
+  });
+});
+
+function onMentorSelect(){
+  document.getElementById('pin-error').style.display = 'none';
+  document.getElementById('pin-input').value = '';
+}
+
+function doLogin(){
+  const id  = document.getElementById('mentor-select').value;
+  const pin = document.getElementById('pin-input').value.trim();
+  const err = document.getElementById('pin-error');
+
+  if(!id){ showToast('Please select your name', 'red'); return; }
+  const mentor = MENTOR_DIR.find(m => m.id === id);
+  if(!mentor || pin !== mentor.pin){
+    err.style.display = 'block';
+    document.getElementById('pin-input').value = '';
+    return;
+  }
+  err.style.display = 'none';
+  currentMentor = mentor;
+  loadProfile();
+  showDashboard();
+}
+
+// ══════════════════════════════════════════════════════════════════
+// PROFILE — load from localStorage (persists per browser)
+// ══════════════════════════════════════════════════════════════════
+function loadProfile(){
+  const saved = localStorage.getItem('emaktab_mentor_' + currentMentor.id);
+  if(saved){
+    profile = JSON.parse(saved);
+  } else {
+    profile = {
+      active: true,
+      telegram: currentMentor.defaultTelegram || '',
+      phone: currentMentor.defaultPhone || '',
+      zoom: currentMentor.defaultZoom || '',
+      email: currentMentor.defaultEmail || '',
+      bio: currentMentor.defaultBio || '',
+      availability: JSON.parse(JSON.stringify(currentMentor.defaultAvail)),
+    };
+  }
+}
+
+function saveLocal(){
+  localStorage.setItem('emaktab_mentor_' + currentMentor.id, JSON.stringify(profile));
+}
+
+// ══════════════════════════════════════════════════════════════════
+// DASHBOARD RENDER
+// ══════════════════════════════════════════════════════════════════
+function showDashboard(){
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('save-bar').style.display = 'flex';
+  document.getElementById('logout-btn').style.display = 'inline-flex';
+  document.getElementById('save-bar-name').textContent = currentMentor.name;
+
+  // Profile header
+  document.getElementById('profile-header').innerHTML = `
+    <div class="avatar">${currentMentor.initials}</div>
+    <div>
+      <div class="profile-name">${currentMentor.name}</div>
+      <div class="profile-meta">Grade ${currentMentor.grade} · ${currentMentor.school}</div>
+      <div class="profile-meta" style="margin-top:3px">ID: ${currentMentor.id}</div>
+    </div>
+  `;
+
+  // Status
+  renderStatus();
+
+  // Contact
+  document.getElementById('c-telegram').value = profile.telegram || '';
+  document.getElementById('c-phone').value    = profile.phone    || '';
+  document.getElementById('c-zoom').value     = profile.zoom     || '';
+  document.getElementById('c-email').value    = profile.email    || '';
+
+  // Subjects
+  const sd = document.getElementById('subjects-display');
+  sd.innerHTML = currentMentor.subjects.map(s =>
+    `<span class="tag-pill gold">${s}</span>`
+  ).join('') + `<span class="tag-pill">Grade ${currentMentor.grade}</span>` +
+    `<span class="tag-pill">${currentMentor.school}</span>`;
+
+  // Bio
+  document.getElementById('bio-input').value = profile.bio || '';
+
+  // Availability
+  renderAvailability();
+}
+
+function renderStatus(){
+  const dot   = document.getElementById('status-dot');
+  const label = document.getElementById('status-label');
+  const btn   = document.getElementById('status-toggle-btn');
+  if(profile.active){
+    dot.className = 'status-dot';
+    label.textContent = 'Active — students can book sessions with you';
+    btn.textContent = 'Set as unavailable';
+  } else {
+    dot.className = 'status-dot off';
+    label.textContent = 'Inactive — you are not visible to students';
+    btn.textContent = 'Set as available';
+  }
+}
+
+function toggleStatus(){
+  profile.active = !profile.active;
+  renderStatus();
+}
+
+// ── AVAILABILITY EDITOR ──
+function renderAvailability(){
+  const editor = document.getElementById('availability-editor');
+  editor.innerHTML = '';
+
+  ALL_DAYS.forEach(day => {
+    const daySlots = profile.availability[day] || [];
+    const allSlots = [...new Set([...COMMON_SLOTS, ...daySlots])].sort();
+
+    const block = document.createElement('div');
+    block.className = 'day-block';
+    block.innerHTML = `
+      <div class="day-label">
+        <span>${day}</span>
+        <span style="font-size:.72rem;color:var(--muted)">${daySlots.length} slot${daySlots.length!==1?'s':''} active</span>
+      </div>
+      <div class="slots-wrap" id="slots-${day}"></div>
+      <div class="add-slot-row">
+        <input type="text" id="add-${day}" placeholder="HH:MM" maxlength="5">
+        <button onclick="addSlot('${day}')">+ Add</button>
+      </div>
+    `;
+    editor.appendChild(block);
+
+    const wrap = block.querySelector(`#slots-${day}`);
+    allSlots.forEach(s => renderSlotToggle(wrap, day, s, daySlots.includes(s)));
+  });
+}
+
+function renderSlotToggle(wrap, day, slot, active){
+  const btn = document.createElement('div');
+  btn.className = 'slot-toggle' + (active ? ' on' : '');
+  btn.textContent = slot;
+  btn.dataset.slot = slot;
+  btn.onclick = () => {
+    const avail = profile.availability[day] || [];
+    if(avail.includes(slot)){
+      profile.availability[day] = avail.filter(s => s !== slot);
+      btn.classList.remove('on');
+    } else {
+      profile.availability[day] = [...avail, slot].sort();
+      btn.classList.add('on');
+    }
+    // Update counter
+    const label = btn.closest('.day-block').querySelector('.day-label span:last-child');
+    const count = (profile.availability[day]||[]).length;
+    label.textContent = `${count} slot${count!==1?'s':''} active`;
+  };
+  wrap.appendChild(btn);
+}
+
+function addSlot(day){
+  const input = document.getElementById('add-'+day);
+  const val   = input.value.trim();
+  if(!/^\d{1,2}:\d{2}$/.test(val)){ showToast('Format: HH:MM (e.g. 14:30)', 'red'); return; }
+  const pad = val.includes(':') ? val.split(':')[0].padStart(2,'0')+':'+val.split(':')[1] : val;
+  const avail = profile.availability[day] || [];
+  if(avail.includes(pad)){ showToast('Slot already exists', 'red'); return; }
+  profile.availability[day] = [...avail, pad].sort();
+  input.value = '';
+  renderAvailability();
+  showToast(`${pad} added to ${day}`, 'green');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// SAVE
+// ══════════════════════════════════════════════════════════════════
+async function saveChanges(){
+  // Collect form values into profile
+  profile.telegram = document.getElementById('c-telegram').value.trim();
+  profile.phone    = document.getElementById('c-phone').value.trim();
+  profile.zoom     = document.getElementById('c-zoom').value.trim();
+  profile.email    = document.getElementById('c-email').value.trim();
+  profile.bio      = document.getElementById('bio-input').value.trim();
+
+  saveLocal();
+
+  const btn = document.getElementById('save-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div> Saving...';
+
+  // Format availability for email
+  const availLines = Object.entries(profile.availability)
+    .filter(([,slots]) => slots.length > 0)
+    .map(([day, slots]) => `${day}: ${slots.join(', ')}`)
+    .join('\n');
+
+  const params = {
+    to_email: ADMIN_EMAIL,
+    mentor_name: currentMentor.name,
+    mentor_id: currentMentor.id,
+    mentor_school: currentMentor.school,
+    mentor_grade: currentMentor.grade,
+    mentor_status: profile.active ? 'ACTIVE' : 'INACTIVE',
+    mentor_telegram: profile.telegram || '—',
+    mentor_phone: profile.phone || '—',
+    mentor_zoom: profile.zoom || '—',
+    mentor_email: profile.email || '—',
+    mentor_bio: profile.bio || '—',
+    mentor_availability: availLines || '—',
+    subjects: currentMentor.subjects.join(', '),
+  };
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+    showToast('✅ Profile saved and sent to Bahrom!', 'green');
+  } catch(e){
+    // Saved locally even if email fails
+    showToast('✅ Saved locally. Email failed — check EmailJS config.', '');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '💾 Save changes';
+}
+
+function logout(){
+  currentMentor = null;
+  profile = {};
+  document.getElementById('login-screen').style.display = 'block';
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('save-bar').style.display = 'none';
+  document.getElementById('logout-btn').style.display = 'none';
+  document.getElementById('mentor-select').value = '';
+  document.getElementById('pin-input').value = '';
+}
+
+function showToast(msg, type=''){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  setTimeout(() => t.className = 'toast', 3500);
+}
+</script>
+</body>
+</html>

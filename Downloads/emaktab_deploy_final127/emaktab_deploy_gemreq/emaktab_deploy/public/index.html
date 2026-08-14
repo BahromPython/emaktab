@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>еМактаб — Платформаи мактаб таълимии Тоҷикистон | eMaktab TJ Tajikistan | Онлайн мактаб 1-11</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/logo-mark-192.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/logo-mark-192.png">
+<meta name="theme-color" content="#0d1117">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="еМактаб">
+<meta name="description" content="еМактаб — eMaktab Tajikistan. Ройгон платформаи мактаб таълимии онлайн барои хонандагони Тоҷикистон, синфҳои 1-11. 146 курс: математика, физика, кимиё, биология, забони тоҷикӣ, русӣ, англисӣ. AI-омӯзгори шахсӣ. Free online school Tajikistan grades 1-11. Made by Ashurov Bahrom (Ашуров Баҳром)">
+<meta property="og:title" content="еМактаб — eMaktab Tajikistan | Ройгон онлайн мактаб синфҳои 1-11">
+<meta property="og:description" content="еМактаб — eMaktab Tajikistan. 146 курс, синфҳои 1-11, AI-омӯзгори шахсӣ. Ройгон. Free online school platform for Tajikistan students.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://emaktab.tj/logo-mark.png">
+<meta name="author" content="Bahrom Ashurov (Ashurov Bahrom)">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "еМактаб",
+  "alternateName": ["eMaktab", "eMaktab Tajikistan", "eMaktab TJ", "Ашуров Бахром еМактаб", "Bahrom Ashurov eMaktab"],
+  "url": "https://emaktab.tj/",
+  "logo": "https://emaktab.tj/logo-mark.png",
+  "description": "Ройгон платформаи таълимии онлайн барои хонандагони синфҳои 1-11 дар Тоҷикистон, бо ёрдамчии AI.",
+  "founder": {
+    "@type": "Person",
+    "name": "Ashurov Bahrom",
+    "alternateName": ["Bahrom Ashurov", "Ашуров Баҳром", "Бахром Ашуров"],
+    "jobTitle": "Founder & Developer",
+    "sameAs": [
+      "https://instagram.com/_.bahrrrom._"
+    ]
+  },
+  "sameAs": [
+    "https://www.instagram.com/e_maktab.tj"
+  ],
+  "areaServed": {
+    "@type": "Country",
+    "name": "Tajikistan"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "student"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ground:#141210; --ground2:#100e0c;
+  --text:#f8f4f4; --text2:#bab6b6; --text3:#dad6d6; --text-muted:#a5a1a1; --text-faint:#7d7979; --text-faintest:#605d5d;
+  --msg-text:#f0ecec;
+  --accent:#b68235; --accent-l:#e1ad66; --accent-ll:#facb8d; --accent-lll:#fff3e4;
+  --hair:rgba(248,244,244,0.10); --hair-strong:rgba(248,244,244,0.22);
+  --border-subtle:rgba(248,244,244,0.14); --border-input:rgba(248,244,244,0.16);
+  --border-gold:rgba(182,130,53,0.40); --border-gold-icon:rgba(182,130,53,0.45); --border-gold-hover:rgba(225,173,102,0.55);
+  --tint14:rgba(182,130,53,0.14); --tint16:rgba(182,130,53,0.16); --tint24:rgba(182,130,53,0.24); --tint30:rgba(182,130,53,0.30);
+  --bloom:rgba(182,130,53,0.20); --selection:rgba(182,130,53,0.34); --mesh:rgba(248,244,244,0.04);
+  --font-h:'Cormorant Garamond',serif; --font-b:'Lora',Georgia,serif;
+  --radius-toggle:3px; --radius-md:4px; --radius-lg:8px; --radius-bubble:14px; --radius-logo:18px; --radius-panel:24px; --radius-shim:26px; --radius-pill:999px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --gutter:clamp(18px,3vw,40px); --section-pad:clamp(56px,6vw,96px);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--ground);color:var(--text);overflow-x:hidden;line-height:1.5}
+::selection{background:var(--selection)}
+:focus-visible{outline:2px solid var(--accent-l);outline-offset:3px}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:1280px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+.hairline-top{border-top:1px solid var(--hair)}
+.hairline-bottom{border-bottom:1px solid var(--hair)}
+.kicker{font-family:var(--font-b);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.h2{font-family:var(--font-h);font-weight:400;font-size:clamp(28px,3.2vw,44px);line-height:1.12;letter-spacing:-.02em;color:var(--text)}
+.lede{font-size:15px;color:var(--text-faint);max-width:26em}
+[data-reveal]{opacity:0}
+[data-reveal].visible{animation:om-rise 640ms var(--ease) both}
+@keyframes om-rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes om-ring{to{transform:rotateY(-360deg)}}
+@keyframes om-glow{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes om-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media (prefers-reduced-motion:reduce){
+  [data-reveal]{opacity:1;animation:none!important}
+  .ring{animation:none!important}
+  .hero-bloom,.cta-bloom,.badge-dot{animation:none!important}
+}
+
+/* ── HEADER ── */
+header.site-header{position:sticky;top:0;z-index:60;background:rgba(20,18,16,0.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+.header-inner{display:flex;align-items:center;gap:clamp(14px,2vw,34px);flex-wrap:wrap;padding:13px var(--gutter);max-width:1280px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{width:34px;height:34px;border-radius:9px;flex-shrink:0}
+.brand-word{font-family:var(--font-h);font-weight:600;font-size:18px;letter-spacing:.14em;color:var(--text)}
+.site-nav{margin-left:auto;display:flex;align-items:center;gap:clamp(14px,1.7vw,26px);flex-wrap:wrap}
+.site-nav a.nav-link{font-size:14px;color:var(--text2);transition:color .16s ease}
+.site-nav a.nav-link:hover{color:var(--accent-ll)}
+.lang-switch{display:flex;gap:2px;border:1px solid rgba(248,244,244,0.16);border-radius:var(--radius-md);padding:2px}
+.lang-switch button{font-family:var(--font-h);font-weight:600;font-size:12px;letter-spacing:.08em;padding:6px 11px;border-radius:3px;border:none;background:transparent;color:var(--text-faint);transition:background .16s ease,color .16s ease}
+.lang-switch button.active{background:rgba(182,130,53,0.24);color:var(--accent-ll)}
+.nav-cta{font-family:var(--font-h);font-weight:600;font-size:15px;color:var(--accent-l);border:1px solid var(--accent-l);border-radius:var(--radius-md);padding:10px 20px;white-space:nowrap;transition:background .17s ease,box-shadow .17s ease,color .17s ease}
+.nav-cta:hover{background:rgba(225,173,102,0.14);box-shadow:0 0 0 4px rgba(182,130,53,0.10);color:var(--accent-ll)}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-h);font-weight:600;border-radius:var(--radius-md);white-space:nowrap;transition:transform .18s ease,background .18s ease,box-shadow .18s ease,color .18s ease,border-color .18s ease}
+.btn-primary{font-size:17px;color:var(--accent-ll);border:1px solid var(--accent-l);background:var(--tint14);padding:16px 30px}
+.btn-primary:hover{transform:translateY(-2px);background:rgba(182,130,53,0.26);box-shadow:0 10px 30px rgba(182,130,53,0.24);color:var(--accent-lll)}
+.btn-secondary{font-size:17px;color:var(--text);border:1px solid rgba(248,244,244,0.20);background:transparent;padding:16px 30px}
+.btn-secondary:hover{background:rgba(248,244,244,0.07);border-color:rgba(248,244,244,0.4);color:#fff}
+.btn-lg{font-size:18px;padding:18px 40px}
+.btn-lg:hover{box-shadow:0 14px 40px rgba(182,130,53,0.28)}
+
+/* ── HERO ── */
+#top{position:relative;isolation:isolate;padding:clamp(44px,5vw,76px) var(--gutter) clamp(52px,6vw,84px);max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(36px,4vw,56px);align-items:center}
+.hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.hero-bloom{position:absolute;width:900px;height:620px;top:-120px;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse at 50% 30%,var(--bloom),transparent 66%);filter:blur(10px);animation:om-glow 9s ease-in-out infinite}
+.hero-mesh{position:absolute;inset:0;background-image:linear-gradient(var(--mesh) 1px,transparent 1px),linear-gradient(90deg,var(--mesh) 1px,transparent 1px);background-size:88px 88px;-webkit-mask-image:radial-gradient(ellipse at 50% 20%,#000 20%,transparent 72%);mask-image:radial-gradient(ellipse at 50% 20%,#000 20%,transparent 72%)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(182,130,53,0.42);border-radius:var(--radius-pill);padding:7px 15px 7px 12px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-l);margin-bottom:26px}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-l);animation:om-glow 2.6s ease-in-out infinite}
+.hero-h1{font-family:var(--font-h);font-weight:400;font-size:clamp(40px,5.2vw,78px);line-height:1.02;letter-spacing:-.025em;margin-bottom:24px;text-wrap:balance;color:var(--text)}
+.hero-h1 em{font-style:italic;color:var(--accent-l)}
+.hero-lede{font-size:18px;line-height:1.68;color:var(--text2);max-width:30em;margin-bottom:34px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:38px}
+.stat-row{display:flex;gap:26px;flex-wrap:wrap;padding-top:26px;border-top:1px solid var(--hair)}
+.stat-item .stat-val{font-family:var(--font-h);font-weight:400;font-size:34px;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-bottom:6px;color:var(--text)}
+.stat-item .stat-lbl{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint)}
+
+/* ── RING CAROUSEL ── */
+.ring-outer{display:grid;place-items:center;min-height:460px}
+.ring-stage{perspective:1200px;width:min(100%,430px);height:400px;overflow:hidden;animation:om-float 8s ease-in-out infinite}
+.ring-scale{transform:scale(.74);transform-style:preserve-3d;width:100%;height:100%;display:grid;place-items:center}
+.ring{position:relative;width:176px;height:240px;transform-style:preserve-3d;animation:om-ring 36s linear infinite}
+.ring-stage:hover .ring{animation-play-state:paused}
+.ring-card{position:absolute;inset:0;backface-visibility:hidden;display:flex;flex-direction:column;padding:20px 18px;border:1px solid var(--border-gold);border-radius:var(--radius-lg);background:linear-gradient(168deg,rgba(29,26,22,0.96),rgba(19,17,16,0.92));box-shadow:0 20px 50px rgba(0,0,0,0.5)}
+.ring-card .rc-grade{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.ring-card .rc-name{font-family:var(--font-h);font-weight:400;font-size:25px;line-height:1.12;color:var(--text)}
+.ring-card .rc-lessons{margin-top:auto;font-size:11.5px;color:var(--text-faint);font-variant-numeric:tabular-nums;padding-top:10px}
+.ring-hint{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faintest);text-align:center;margin-top:14px}
+
+/* ── SECTIONS (shared) ── */
+.section{padding:var(--section-pad) var(--gutter);max-width:1280px;margin:0 auto}
+.bg-a{background:var(--ground)}
+.bg-b{background:var(--ground2)}
+.section-head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:36px;flex-wrap:wrap;margin-bottom:44px}
+.section-intro{max-width:40em;margin-bottom:44px}
+
+/* ── WHY EMAKTAB ── */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(32px,4vw,64px);align-items:start}
+.why-body{font-size:17px;color:var(--text2);margin-bottom:20px}
+.pull-quote{font-size:19px;font-style:italic;color:var(--text);border-left:2px solid var(--accent);padding-left:20px}
+
+/* ── CURRICULUM CARDS ── */
+.card-grid-perspective{perspective:1600px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:18px}
+.cur-card{transform-style:preserve-3d;border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:26px 24px 28px;background:linear-gradient(168deg,rgba(248,244,244,0.06),rgba(248,244,244,0.015));transition:transform 300ms var(--ease),border-color 300ms ease,box-shadow 300ms ease}
+.cur-card:hover{transform:translateZ(60px) rotateX(4deg);border-color:var(--border-gold-hover);box-shadow:0 30px 60px rgba(0,0,0,0.6)}
+.cur-card .cc-grade{font-family:var(--font-h);font-weight:400;font-size:42px;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--text);margin-bottom:8px}
+.cur-card .cc-stage{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.cur-card .cc-body{font-size:14.5px;color:var(--text2);line-height:1.6;margin-bottom:16px}
+.cur-card .cc-foot{display:flex;justify-content:space-between;font-size:12px;color:var(--text-faint);font-variant-numeric:tabular-nums;border-top:1px solid var(--hair);padding-top:12px}
+
+/* ── FEATURES ── */
+.feat-card{border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:28px 26px 30px;background:linear-gradient(168deg,rgba(248,244,244,0.05),rgba(248,244,244,0.012));transition:transform 240ms var(--ease),border-color 240ms ease,box-shadow 240ms ease}
+.feat-card:hover{transform:translateY(-6px);border-color:var(--border-gold-hover);box-shadow:0 26px 54px rgba(0,0,0,0.55)}
+.feat-icon{width:44px;height:44px;border:1px solid var(--border-gold-icon);border-radius:var(--radius-md);display:grid;place-items:center;margin-bottom:22px;color:var(--accent-l)}
+.feat-icon svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.3;fill:none}
+.feat-title{font-family:var(--font-h);font-weight:600;font-size:22px;line-height:1.2;margin-bottom:10px;color:var(--text)}
+.feat-body{font-size:15px;color:var(--text2);line-height:1.65}
+
+/* ── AI TUTOR ── */
+.ai-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(36px,4.5vw,60px);align-items:center}
+.ai-points{border-top:1px solid var(--hair);margin-top:6px}
+.ai-point{display:flex;gap:16px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--hair)}
+.ai-point .n{font-family:var(--font-h);font-size:13px;color:var(--accent);font-variant-numeric:tabular-nums}
+.ai-point .t{font-size:15.5px;color:var(--text3)}
+.solver{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.solver input{flex:1 1 220px;min-width:0;background:rgba(248,244,244,0.05);border:1px solid var(--border-input);border-radius:var(--radius-md);padding:13px 15px;color:var(--text);font-family:var(--font-b);font-size:15px}
+.solver input::placeholder{color:var(--text-faint)}
+.solver button{font-family:var(--font-h);font-weight:600;font-size:15px;color:var(--accent-ll);background:var(--tint16);border:1px solid var(--accent-l);border-radius:var(--radius-md);padding:13px 24px;transition:background .17s ease,opacity .17s ease}
+.solver button:hover{background:rgba(182,130,53,0.3)}
+.solver button:disabled{opacity:.5;cursor:not-allowed}
+.solve-steps{display:grid;gap:8px;margin-top:14px}
+.solve-step{display:grid;grid-template-columns:24px 1fr;gap:12px;border-left:1px solid rgba(182,130,53,0.5);padding:6px 0 6px 14px;animation:om-rise 380ms var(--ease) both}
+.solve-step .n{font-family:var(--font-h);font-size:12px;color:var(--accent)}
+.solve-step .t{font-size:14.5px;color:var(--text3);white-space:pre-line}
+.solve-msg{font-size:14px;color:var(--text-faint);margin-top:12px}
+.solve-msg.error{color:var(--accent-l)}
+
+.ai-panel-wrap{perspective:1300px;display:grid;place-items:center}
+.ai-tilt{position:relative;width:min(100%,380px);transform-style:preserve-3d;transition:transform 420ms var(--ease)}
+.ai-tilt.tracking{transition:transform 90ms linear}
+.ai-shim{position:absolute;inset:20px -24px -20px 24px;border-radius:var(--radius-shim);border:1px solid rgba(182,130,53,0.3);transform:translateZ(-70px)}
+.ai-panel{position:relative;border:1px solid var(--border-input);border-radius:var(--radius-panel);background:linear-gradient(172deg,#1d1a16,#131110);box-shadow:0 40px 90px rgba(0,0,0,0.65);padding:18px}
+.ai-panel-head{display:flex;justify-content:space-between;align-items:center;padding:2px 4px 16px}
+.ai-panel-head .left{display:flex;align-items:center;gap:8px}
+.ai-panel-head .left svg{width:22px;height:22px;border-radius:6px}
+.ai-panel-head .left span{font-family:var(--font-h);font-size:12px;letter-spacing:.12em;color:var(--accent-l)}
+.ai-panel-head .grade{font-size:11px;color:var(--text-faint)}
+.msg-list{display:grid;gap:12px}
+.msg-row{display:flex}
+.msg-row.me{justify-content:flex-end}
+.msg-row.bot{justify-content:flex-start}
+.bubble{max-width:90%;border-radius:var(--radius-bubble);padding:13px 15px}
+.msg-row.me .bubble{border:1px solid var(--border-subtle);background:rgba(248,244,244,0.05)}
+.msg-row.bot .bubble{border:1px solid var(--border-gold-icon);background:rgba(182,130,53,0.10)}
+.bubble .speaker{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:6px}
+.bubble .text{font-size:14.5px;line-height:1.6;color:var(--msg-text);white-space:pre-line}
+
+/* ── HOW IT WORKS ── */
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:clamp(20px,3vw,34px)}
+.step{border-top:1px solid var(--hair-strong);padding-top:22px}
+.step .numeral{font-family:var(--font-h);font-weight:400;font-size:52px;line-height:1;color:rgba(182,130,53,0.85);font-variant-numeric:tabular-nums;margin-bottom:16px}
+.step .stitle{font-family:var(--font-h);font-weight:600;font-size:20px;margin-bottom:8px;color:var(--text)}
+.step .sbody{font-size:14.5px;color:var(--text-muted);line-height:1.6}
+
+/* ── CLOSING CTA ── */
+.closing{position:relative;text-align:center;padding:clamp(70px,8vw,116px) var(--gutter);overflow:hidden;max-width:1280px;margin:0 auto}
+.cta-bloom{position:absolute;width:900px;height:640px;left:50%;top:-180px;transform:translateX(-50%);background:radial-gradient(ellipse at 50% 50%,var(--bloom),transparent 66%);filter:blur(12px);pointer-events:none}
+.closing svg.logo-lg{width:64px;height:64px;border-radius:var(--radius-logo);margin:0 auto 26px}
+.closing h2{font-family:var(--font-h);font-weight:400;font-size:clamp(34px,4.4vw,62px);line-height:1.04;letter-spacing:-.025em;max-width:20em;margin:0 auto 20px;color:var(--text)}
+.closing h2 em{font-style:italic;color:var(--accent-l)}
+.closing .lede2{max-width:34em;font-size:17.5px;color:var(--text2);margin:0 auto 32px}
+.closing .fine{font-size:12.5px;color:var(--text-faint);letter-spacing:.05em;margin-top:18px}
+
+/* ── FOOTER ── */
+footer.site-footer{background:var(--ground2);border-top:1px solid var(--hair)}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:34px;padding:52px var(--gutter) 28px;max-width:1280px;margin:0 auto}
+.footer-col1 .flogo{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.footer-col1 .flogo img{width:28px;height:28px;border-radius:7px;object-fit:contain;background:#141210}
+.footer-col1 .flogo span{font-family:var(--font-h);font-weight:600;font-size:16px;letter-spacing:.14em}
+.footer-col1 .ftag{font-size:14px;color:var(--text-faint);max-width:24em;line-height:1.5}
+.fcol-h{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.fcol-links{display:grid;gap:9px}
+.fcol-links a{font-size:14px;color:var(--text2);transition:color .15s ease}
+.fcol-links a:hover{color:var(--accent-ll)}
+.footer-bottom{max-width:1280px;margin:0 auto;padding:0 var(--gutter) 30px}
+.footer-bottom-inner{border-top:1px solid var(--hair);padding-top:18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--text-faintest)}
+
+@media(max-width:640px){
+  .hero-actions,.solver{flex-direction:column;align-items:stretch}
+  .hero-actions .btn,.solver button{justify-content:center}
+}
+</style>
+
+<!-- ═══ SEO: Keywords + Geo + Canonical ═══ -->
+<meta name="keywords" content="emaktab, emaktab tajikistan, emaktab online, emaktab.tj, еМактаб, еМактаб Тоҷикистон, мактаб онлайн тоҷикистон, таълими онлайн тоҷикистон, курсҳои онлайн синфҳои 1-11, онлайн дарс тоҷикистон, AI омӯзгор тоҷикистон, математика онлайн тоҷикистон, физика онлайн тоҷикистон, синфи 9 онлайн, синфи 11 онлайн, ВОА тайёрӣ тоҷикистон, online school tajikistan, free education tajikistan, tajik online school, e-learning tajikistan, бесплатное образование таджикистан, онлайн школа таджикистан, учеба онлайн таджикистан, eMaktab TJ, таълим ройгон тоҷикистон, emaktab founder, emaktab Ashurov Bahrom, Ashurov Bahrom emaktab, Bahrom Ashurov founder, Bahrom Ashurov developer, who created emaktab, who founded emaktab, emaktab creator, emaktab.tj founder, eMaktab AI tutor, eMaktab Tajikistan school platform, eMaktab grades 1-11, eMaktab math physics chemistry, Tajikistan e-learning platform, eMaktab AI teacher, Dushanbe online school, Tajik student platform, Ashurov Bahrom Tajikistan, Bahrom Ashurov Dushanbe, eMaktab app, eMaktab.tj website, best online school Tajikistan, Tajikistan students AI tutor, eMaktab courses, eMaktab login, eMaktab register, Tajikistan ministry of education online courses, eMaktab developer Bahrom, eMaktab project founder, Ashurov Bahrom student developer, young developer Tajikistan, Tajikistan edtech founder, eMaktab edtech startup, eMaktab learning platform Tajikistan, Bahrom Ashurov Instagram, eMaktab official website, eMaktab AI homework help, Tajikistan school app, eMaktab exam prep, SAT IELTS Tajikistan eMaktab, eMaktab programming course, Tajik language lessons online, eMaktab teacher AI, eMaktab review, eMaktab Tajikistan founder Bahrom Ashurov, эмактаб тҷ, эмактаб тоҷикистон, эмактаб мактаби онлайн, бунёдгузори эмактаб, эмактаб Ашуров Баҳром, Ашуров Баҳром эмактаб, Баҳром Ашуров бунёдгузор, Баҳром Ашуров барномасоз, киро сохтааст эмактабро, киро таъсис додааст эмактабро, эмактаб муаллиф, эмактаб.тҷ бунёдгузор, еМактаб AI омӯзгор, еМактаб платформаи мактабии Тоҷикистон, мактаби ройгони онлайн Тоҷикистон, еМактаб синфҳои 1-11, еМактаб математика физика химия, платформаи таълимии онлайни Тоҷикистон, еМактаб омӯзгори AI, мактаби онлайн Душанбе, платформаи хонандагони тоҷик, Ашуров Баҳром Тоҷикистон, Баҳром Ашуров Душанбе, барномаи еМактаб, вебсайти еМактаб.тҷ, беҳтарин мактаби онлайни Тоҷикистон, ёрдамчии AI барои хонандагони Тоҷикистон, курсҳои еМактаб, вуруд ба еМактаб, сабти ном дар еМактаб, курсҳои онлайни Вазорати маорифи Тоҷикистон, барномасози еМактаб Баҳром, бунёдгузори лоиҳаи еМактаб, Ашуров Баҳром барномасози ҷавон, барномасози ҷавони Тоҷикистон, бунёдгузори эдтех Тоҷикистон, эдтех старталоиҳаи еМактаб, платформаи омӯзишии еМактаб Тоҷикистон, Баҳром Ашуров Instagram, сайти расмии еМактаб, еМактаб AI кӯмак барои вазифаи хонагӣ, барномаи мактабии Тоҷикистон, омодагӣ ба имтиҳон еМактаб, SAT IELTS Тоҷикистон еМактаб, курси барномасозӣ еМактаб, дарсҳои забони тоҷикӣ онлайн, омӯзгори AI еМактаб, шарҳи еМактаб, бунёдгузори еМактаб Тоҷикистон Баҳром Ашуров">
+<meta name="author" content="еМактаб — eMaktab Tajikistan">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="geo.region" content="TJ">
+<meta name="geo.country" content="Tajikistan">
+<meta name="geo.placename" content="Dushanbe, Tajikistan">
+<meta name="language" content="Tajik, Russian">
+<meta name="target" content="students, teachers, parents">
+<meta name="category" content="Education, Online Learning">
+<meta name="coverage" content="Tajikistan">
+<meta name="revisit-after" content="7 days">
+<link rel="canonical" href="https://emaktab.tj/">
+<meta property="og:url" content="https://emaktab.tj/">
+<meta property="og:locale" content="tg_TJ">
+<meta property="og:site_name" content="еМактаб — eMaktab Tajikistan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://emaktab.tj/logo-mark.png">
+<meta name="twitter:title" content="еМактаб — eMaktab Tajikistan">
+<meta name="twitter:description" content="Ройгон платформаи таълимии Тоҷикистон. 146 курс, AI-омӯзгор. Free online school Tajikistan.">
+<link rel="alternate" hreflang="tg" href="https://emaktab.tj/">
+<link rel="alternate" hreflang="ru" href="https://emaktab.tj/">
+<link rel="alternate" hreflang="x-default" href="https://emaktab.tj/">
+
+<!-- ═══ Schema.org: Educational Organization ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"EducationalOrganization","name":"еМактаб","alternateName":["eMaktab","eMaktab Tajikistan","еМактаб ТЈ","emaktab.tj","eMaktab TJ"],"url":"https://emaktab.tj","description":"Free online educational platform for Tajikistan students grades 1-11. 146 courses, AI tutor, all subjects in Tajik and Russian.","foundingDate":"2025","inLanguage":["tg","ru"],"areaServed":{"@type":"Country","name":"Tajikistan"},"audience":{"@type":"EducationalAudience","educationalRole":"student","audienceType":"Students grades 1-11 Tajikistan"},"offers":{"@type":"Offer","price":"0","priceCurrency":"TJS","availability":"https://schema.org/InStock","description":"Completely free"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Online Courses Tajikistan","numberOfItems":146},"sameAs":["https://emaktab.tj","https://donish-79396.web.app"]}
+</script>
+
+<!-- ═══ Schema.org: WebSite ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"еМактаб — eMaktab Tajikistan","alternateName":"eMaktab Tajikistan","url":"https://emaktab.tj","description":"Free online school platform for Tajikistan grades 1-11","inLanguage":["tg","ru"]}
+</script>
+
+<!-- ═══ Schema.org: FAQ ═══ -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is eMaktab Tajikistan?","acceptedAnswer":{"@type":"Answer","text":"еМактаб (eMaktab) is a free online educational platform for students in Tajikistan, grades 1-11. It offers 146 courses in all subjects with a personal AI tutor in Tajik and Russian."}},{"@type":"Question","name":"Оё еМактаб ройгон аст?","acceptedAnswer":{"@type":"Answer","text":"Бале, еМактаб 100% ройгон аст барои ҳамаи хонандагони синфҳои 1-11 дар Тоҷикистон."}},{"@type":"Question","name":"Бесплатна ли платформа еМактаб?","acceptedAnswer":{"@type":"Answer","text":"Да, еМактаб полностью бесплатна для всех учеников 1-11 классов в Таджикистане. 146 курсов, AI-учитель."}},{"@type":"Question","name":"Кадом фанҳо дар еМактаб мавҷуданд?","acceptedAnswer":{"@type":"Answer","text":"Дар еМактаб ҳамаи фанҳои мактабӣ мавҷуданд: математика, алгебра, геометрия, физика, кимиё, биология, забони тоҷикӣ, адабиёт, забони русӣ, забони англисӣ, таърих, ҷуғрофия, информатика ва ғайра."}}]}
+</script>
+</head>
+<body><header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#top">
+      <img src="/logo-mark.png" alt="еМактаб" width="34" height="34" style="width:34px;height:34px;border-radius:9px;object-fit:contain;background:#f8f4f4">
+      <span class="brand-word">еМАКТАБ</span>
+    </a>
+    <nav class="site-nav">
+      <a class="nav-link" href="#curriculum" data-i18n="navCurriculum">Барнома</a>
+      <a class="nav-link" href="#features" data-i18n="navFeatures">Имкониятҳо</a>
+      <a class="nav-link" href="#tutor" data-i18n="navTutor">AI-омӯзгор</a>
+      <div class="lang-switch">
+        <button id="lang-tg" onclick="setLang('tg')" class="active">TJ</button>
+        <button id="lang-en" onclick="setLang('en')">EN</button>
+      </div>
+      <a class="nav-cta" href="eMaktab_lms_v2.html" data-i18n="navCta">Оғоз кун</a>
+    </nav>
+  </div>
+</header>
+
+<section id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-bloom"></div>
+    <div class="hero-mesh"></div>
+  </div>
+  <div>
+    <div class="eyebrow" data-reveal><span class="badge-dot"></span><span data-i18n="heroBadge">Синфҳои 1–11 · Тоҷикистон</span></div>
+    <h1 class="hero-h1" data-reveal><span data-i18n="heroTitleA">Тамоми мактаб, дар </span><em data-i18n="heroTitleB">як телефон</em></h1>
+    <p class="hero-lede" data-reveal data-i18n="heroLede">3,574 дарс аз барномаи расмии мактабӣ, 79 фан ва омӯзгори AI, ки ба тоҷикӣ ҷавоб медиҳад. Бе пардохт, бе эълон, бе интернети доимӣ.</p>
+    <div class="hero-actions" data-reveal>
+      <a class="btn btn-primary" href="eMaktab_lms_v2.html" data-i18n="heroCtaA">Ройгон оғоз кун</a>
+      <a class="btn btn-secondary" href="#tutor" data-i18n="heroCtaB">AI-омӯзгорро бин</a>
+    </div>
+    <div class="stat-row" data-reveal id="stat-row">
+      <div class="stat-item"><div class="stat-val" data-count="3574">0</div><div class="stat-lbl" data-i18n="statLessons">Дарс</div></div>
+      <div class="stat-item"><div class="stat-val" data-count="79">0</div><div class="stat-lbl" data-i18n="statSubjects">Фан</div></div>
+      <div class="stat-item"><div class="stat-val">1–11</div><div class="stat-lbl" data-i18n="statGrades">Синф</div></div>
+      <div class="stat-item"><div class="stat-val" data-i18n="statPriceVal">0 с.</div><div class="stat-lbl" data-i18n="statPrice">Арзиш</div></div>
+    </div>
+  </div>
+  <div class="ring-outer">
+    <div class="ring-stage">
+      <div class="ring-scale">
+        <div class="ring" id="ring"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="ring-hint-wrap wrap" style="margin-top:-40px;margin-bottom:20px"><div class="ring-hint" data-i18n="ringHint">Фанҳо · гардиш</div></div>
+
+<section class="section bg-a hairline-top">
+  <div class="why-grid">
+    <div data-reveal>
+      <div class="kicker" data-i18n="problemKicker">Чаро еМактаб</div>
+      <h2 class="h2" data-i18n="problemTitle">Дониш бояд аз ҷои зист вобаста набошад</h2>
+    </div>
+    <div data-reveal>
+      <p class="why-body" data-i18n="problemBody">Хонандаи Душанбе омӯзгори хусусӣ, курс ва китоби иловагӣ дорад. Хонандаи деҳот — камтар. Пас аз ёздаҳ сол ин фарқият ба фарқи имконот табдил меёбад: кӣ ба донишгоҳ медарояд, кӣ намедарояд.</p>
+      <p class="pull-quote" data-i18n="problemPull">еМактаб ҳамон як манбаъро ба ҳар ду мерасонад — ба тоҷикӣ, ройгон, дар ҳар гӯшаи кишвар.</p>
+    </div>
+  </div>
+</section>
+
+<section id="curriculum" class="section bg-b hairline-top hairline-bottom">
+  <div class="section-head-row">
+    <div data-reveal>
+      <div class="kicker" data-i18n="curKicker">Барномаи дарсӣ</div>
+      <h2 class="h2" data-i18n="curTitle">Аз алифбо то астрономия</h2>
+    </div>
+    <p class="lede" data-reveal data-i18n="curLede">Мазмун аз барномаи расмии Вазорати маориф гирифта шуда, аз рӯи синф ва фан тартиб дода шудааст.</p>
+  </div>
+  <div class="card-grid-perspective">
+    <div class="card-grid" id="stage-cards"></div>
+  </div>
+</section>
+
+<section id="features" class="section bg-a">
+  <div class="section-intro" data-reveal>
+    <div class="kicker" data-i18n="featKicker">Имкониятҳо</div>
+    <h2 class="h2" data-i18n="featTitle">Ҳама чиз барои хондан, дар як ҷо</h2>
+    <p class="lede" style="margin-top:10px" data-i18n="featLede">Дарс, санҷиш, имтиҳон ва омӯзгор — дар як платформа, бе пардохт.</p>
+  </div>
+  <div class="card-grid" id="feature-cards"></div>
+</section>
+
+<section id="tutor" class="section bg-b hairline-top hairline-bottom">
+  <div class="ai-grid">
+    <div>
+      <div class="kicker" data-reveal data-i18n="aiKicker">AI-омӯзгор</div>
+      <h2 class="h2" data-reveal data-i18n="aiTitle">Дарсро нафаҳмидӣ? Бипурс.</h2>
+      <p class="why-body" data-reveal style="margin-top:14px;max-width:32em" data-i18n="aiBody">Дар синф мавзӯъ як бор шарҳ дода мешавад. Дар еМактаб — чанд бор ки лозим шавад, бо мисолҳои наздик ва бо забони тоҷикӣ.</p>
+      <div class="ai-points" id="ai-points" data-reveal></div>
+      <div class="solver" data-reveal>
+        <input type="text" id="solve-input" data-i18n-ph="solvePlaceholder" placeholder="Масалан: 2x + 5 = 17">
+        <button id="solve-btn" onclick="runSolver()" data-i18n="solveButton">Ҳал кун</button>
+      </div>
+      <div id="solve-output"></div>
+    </div>
+    <div class="ai-panel-wrap">
+      <div class="ai-tilt" id="ai-tilt">
+        <div class="ai-shim" aria-hidden="true"></div>
+        <div class="ai-panel">
+          <div class="ai-panel-head">
+            <div class="left">
+              <img src="/logo-mark.png" alt="еМактаб" style="width:22px;height:22px;border-radius:6px;object-fit:contain;background:#1a1714">
+              <span data-i18n="mockPanel">Омӯзгори AI</span>
+            </div>
+            <div class="grade" data-i18n="mockGrade">Синфи 9</div>
+          </div>
+          <div class="msg-list" id="chat-transcript"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="section bg-a">
+  <div class="section-intro" data-reveal>
+    <div class="kicker" data-i18n="howKicker">Тарзи кор</div>
+    <h2 class="h2" data-i18n="howTitle">Чор қадам то дониш</h2>
+  </div>
+  <div class="steps-grid" id="steps-grid"></div>
+</section>
+
+<section class="closing bg-b hairline-top">
+  <div class="cta-bloom" aria-hidden="true"></div>
+  <img class="logo-lg" data-reveal src="/logo-mark.png" alt="еМактаб" style="width:64px;height:64px;border-radius:18px;object-fit:contain;background:#141210;margin:0 auto 26px">
+  <h2 data-reveal><span data-i18n="ctaTitleA">Имрӯз оғоз кун, </span><em data-i18n="ctaTitleB">ройгон</em></h2>
+  <p class="lede2" data-reveal data-i18n="ctaBody">Бақайдгирӣ сӣ сония мегирад. Дастгоҳи ту кофист — интернети доимӣ ҳатмӣ нест.</p>
+  <a class="btn btn-primary btn-lg" data-reveal href="eMaktab_lms_v2.html" data-i18n="ctaButton">Ворид шав</a>
+  <div class="fine" data-reveal data-i18n="ctaNote">Ройгон · бе эълон · бе корти бонкӣ</div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-col1">
+      <div class="flogo">
+        <img src="/logo-mark.png" alt="еМактаб">
+        <span>еМАКТАБ</span>
+      </div>
+      <p class="ftag" data-i18n="footTag">Платформаи таълимии Тоҷикистон, синфҳои 1–11.</p>
+    </div>
+    <div>
+      <div class="fcol-h" data-i18n="footPlatform">Платформа</div>
+      <div class="fcol-links">
+        <a href="eMaktab_lms_v2.html" data-i18n="footLogin">Ворид шудан</a>
+        <a href="#curriculum" data-i18n="navCurriculum">Барнома</a>
+        <a href="#features" data-i18n="navFeatures">Имкониятҳо</a>
+        <a href="support.html" data-i18n="footSupport">Дастгирӣ</a>
+        <a href="terms.html" data-i18n="footTerms">Шартҳои истифода</a>
+      </div>
+    </div>
+    <div>
+      <div class="fcol-h" data-i18n="footContact">Тамос</div>
+      <div class="fcol-links">
+        <a href="mailto:bahromasurov708@gmail.com">bahromasurov708@gmail.com</a>
+        <a href="tel:+992003300600">+992 003 300 600</a>
+        <a href="https://instagram.com/_.bahrrrom._" target="_blank" rel="noopener">@_.bahrrrom._</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <div>© 2026 еМактаб · Тоҷикистон</div>
+      <div data-i18n="footCredit">Сохта шуд аз ҷониби Ашуров Баҳром</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// CONTENT — bilingual (tg default, en) — mirrors the approved design spec
+// ══════════════════════════════════════════════════════════════════
+const ICONS = {
+  ai: '<svg viewBox="0 0 24 24"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7.7-2z"/></svg>',
+  quiz: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>',
+  offline: '<svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 19h16"/></svg>',
+  progress: '<svg viewBox="0 0 24 24"><path d="M4 20V10"/><path d="M12 20V4"/><path d="M20 20v-7"/></svg>',
+  exam: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M9 12.5L7 21l5-2.5L17 21l-2-8.5"/></svg>',
+  langs: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg>'
+};
+
+const STR = {
+tg: {
+  navCurriculum:"Барнома", navFeatures:"Имкониятҳо", navTutor:"AI-омӯзгор", navCta:"Оғоз кун",
+  heroBadge:"Синфҳои 1–11 · Тоҷикистон",
+  heroTitleA:"Тамоми мактаб, дар ", heroTitleB:"як телефон",
+  heroLede:"3,574 дарс аз барномаи расмии мактабӣ, 79 фан ва омӯзгори AI, ки ба тоҷикӣ ҷавоб медиҳад. Бе пардохт, бе эълон, бе интернети доимӣ.",
+  heroCtaA:"Ройгон оғоз кун", heroCtaB:"AI-омӯзгорро бин",
+  ringHint:"Фанҳо · гардиш",
+  statLessons:"Дарс", statSubjects:"Фан", statGrades:"Синф", statPrice:"Арзиш", statPriceVal:"0 с.",
+  problemKicker:"Чаро еМактаб",
+  problemTitle:"Дониш бояд аз ҷои зист вобаста набошад",
+  problemBody:"Хонандаи Душанбе омӯзгори хусусӣ, курс ва китоби иловагӣ дорад. Хонандаи деҳот — камтар. Пас аз ёздаҳ сол ин фарқият ба фарқи имконот табдил меёбад: кӣ ба донишгоҳ медарояд, кӣ намедарояд.",
+  problemPull:"еМактаб ҳамон як манбаъро ба ҳар ду мерасонад — ба тоҷикӣ, ройгон, дар ҳар гӯшаи кишвар.",
+  curKicker:"Барномаи дарсӣ", curTitle:"Аз алифбо то астрономия",
+  curLede:"Мазмун аз барномаи расмии Вазорати маориф гирифта шуда, аз рӯи синф ва фан тартиб дода шудааст.",
+  stages:[
+    {grade:"1–4", stage:"Ибтидоӣ", body:"Алифбо, ҳисоб, табиатшиносӣ ва забонҳо — асоси мустаҳкам.", g:[1,2,3,4]},
+    {grade:"5–7", stage:"Миёна", body:"Алгебра, геометрия, таърих, ҷуғрофия, биология, англисӣ.", g:[5,6,7]},
+    {grade:"8–9", stage:"ВОА", body:"Физика, кимиё, информатика ва тайёрии имтиҳони ниҳоӣ.", g:[8,9]},
+    {grade:"10–11", stage:"Хатм", body:"Математикаи олӣ, барномасозӣ, ҳуқуқ — роҳ ба донишгоҳ.", g:[10,11]}
+  ],
+  subjWord:"фан",
+  featKicker:"Имкониятҳо", featTitle:"Ҳама чиз барои хондан, дар як ҷо",
+  featLede:"Дарс, санҷиш, имтиҳон ва омӯзгор — дар як платформа, бе пардохт.",
+  features:[
+    {k:"ai", title:"Омӯзгори AI", body:"Саволатро бипурс — ҷавоби фаҳмо ба тоҷикӣ мегирӣ, дар ҳар вақти шабонарӯз."},
+    {k:"quiz", title:"Санҷиши ҳар дарс", body:"Пас аз ҳар дарс се савол. Ҷавоб фавран санҷида, хато шарҳ дода мешавад."},
+    {k:"offline", title:"Бе интернет", body:"Як бор бор кун — дар куҳ, дар деҳа, дар роҳ хонда метавонӣ."},
+    {k:"progress", title:"Пешрафт", body:"Кадом дарс хонда шуд, кадом мондааст — ҳама сабт ва нишон дода мешавад."},
+    {k:"exam", title:"Тайёрӣ ба ВОА", body:"Саволҳои мураккаб бо вақти маҳдуд. Синфҳои 9 ва 11 барномаи алоҳида доранд."},
+    {k:"langs", title:"Се забон", body:"Тоҷикӣ, русӣ ва англисӣ — интихоб аз они хонанда."}
+  ],
+  aiKicker:"AI-омӯзгор", aiTitle:"Дарсро нафаҳмидӣ? Бипурс.",
+  aiBody:"Дар синф мавзӯъ як бор шарҳ дода мешавад. Дар еМактаб — чанд бор ки лозим шавад, бо мисолҳои наздик ва бо забони тоҷикӣ.",
+  aiPoints:["Ба ҳар саволи дарсии синфҳои 1–11 ҷавоб медиҳад","Мавзӯъро бо мисолҳои тоҷикӣ шарҳ медиҳад","Масъаларо қадам ба қадам ҳал мекунад","Барои ВОА ва имтиҳони ниҳоӣ тайёр мекунад"],
+  solvePlaceholder:"Масалан: 2x + 5 = 17", solveButton:"Ҳал кун",
+  solveEmpty:"Аввал саволе нависед", solveLoading:"Ҳал карда истодааст…", solveError:"Хатогӣ рух дод. Дигар кӯшиш кунед.",
+  mockPanel:"Омӯзгори AI", mockGrade:"Синфи 9",
+  transcript:[
+    {who:"Хонанда", me:true, text:"Митоз чист ва чанд марҳила дорад?"},
+    {who:"еМактаб", me:false, text:"Митоз — тақсимшавии ҳуҷайраи соматикӣ: аз 1 ҳуҷайра 2 ҳуҷайраи якхела.\n\n1. Профаза — хромосомаҳо зич мешаванд\n2. Метафаза — дар хатти миёна саф мекашанд\n3. Анафаза — ба қутбҳо ҷудо мешаванд\n4. Телофаза — ду ядрои нав"},
+    {who:"Хонанда", me:true, text:"Фарқи он аз мейоз дар чист?"}
+  ],
+  howKicker:"Тарзи кор", howTitle:"Чор қадам то дониш",
+  steps:[
+    {n:"01", title:"Бақайдгирӣ", body:"Ном ва синфатро ворид кун. Сӣ сония, ройгон, бе корти бонкӣ."},
+    {n:"02", title:"Дарс интихоб кун", body:"Фан ва мавзӯъро аз 3,574 дарс интихоб кун."},
+    {n:"03", title:"Хон ва бипурс", body:"Дарсро хон, санҷишро гузар, аз омӯзгори AI бипурс."},
+    {n:"04", title:"Имтиҳон деҳ", body:"Дар охири фан имтиҳони ниҳоӣ — тайёрии воқеӣ ба ВОА."}
+  ],
+  ctaTitleA:"Имрӯз оғоз кун, ", ctaTitleB:"ройгон",
+  ctaBody:"Бақайдгирӣ сӣ сония мегирад. Дастгоҳи ту кофист — интернети доимӣ ҳатмӣ нест.",
+  ctaButton:"Ворид шав", ctaNote:"Ройгон · бе эълон · бе корти бонкӣ",
+  footTag:"Платформаи таълимии Тоҷикистон, синфҳои 1–11.",
+  footPlatform:"Платформа", footLogin:"Ворид шудан", footSupport:"Дастгирӣ", footTerms:"Шартҳои истифода",
+  footContact:"Тамос", footCredit:"Сохта шуд аз ҷониби Ашуров Баҳром"
+},
+en: {
+  navCurriculum:"Curriculum", navFeatures:"Features", navTutor:"AI tutor", navCta:"Get started",
+  heroBadge:"Grades 1–11 · Tajikistan",
+  heroTitleA:"A whole school, in ", heroTitleB:"one phone",
+  heroLede:"3,574 lessons from the national curriculum, 79 subjects, and an AI tutor that answers in Tajik. No payment, no ads, no need for a steady connection.",
+  heroCtaA:"Start free", heroCtaB:"See the AI tutor",
+  ringHint:"Subjects · rotating",
+  statLessons:"Lessons", statSubjects:"Subjects", statGrades:"Grades", statPrice:"Price", statPriceVal:"0",
+  problemKicker:"Why eMaktab",
+  problemTitle:"Knowledge should not depend on where you live",
+  problemBody:"A student in Dushanbe has tutors, courses and extra books. A student in a village has less. After eleven years that gap becomes a gap in opportunity: who reaches university and who does not.",
+  problemPull:"eMaktab puts the same single resource in front of both — in Tajik, free, anywhere in the country.",
+  curKicker:"Curriculum", curTitle:"From the alphabet to astronomy",
+  curLede:"Content follows the official Ministry of Education programme, organised by grade and subject.",
+  stages:[
+    {grade:"1–4", stage:"Primary", body:"Alphabet, arithmetic, natural science and languages — a solid base.", g:[1,2,3,4]},
+    {grade:"5–7", stage:"Middle", body:"Algebra, geometry, history, geography, biology, English.", g:[5,6,7]},
+    {grade:"8–9", stage:"Exam years", body:"Physics, chemistry, computing and final exam preparation.", g:[8,9]},
+    {grade:"10–11", stage:"Graduation", body:"Advanced maths, programming, law — the road to university.", g:[10,11]}
+  ],
+  subjWord:"subjects",
+  featKicker:"Features", featTitle:"Everything you need to study, in one place",
+  featLede:"Lessons, quizzes, exams and a tutor — on one platform, at no cost.",
+  features:[
+    {k:"ai", title:"AI tutor", body:"Ask your question and get a clear answer in Tajik, at any hour of the day."},
+    {k:"quiz", title:"A quiz per lesson", body:"Three questions after each lesson, marked instantly, with mistakes explained."},
+    {k:"offline", title:"Without internet", body:"Download once and study in the mountains, a village, or on the road."},
+    {k:"progress", title:"Progress", body:"What has been studied and what is left — recorded and shown, lesson by lesson."},
+    {k:"exam", title:"Exam preparation", body:"Harder questions against the clock. Grades 9 and 11 have their own programme."},
+    {k:"langs", title:"Three languages", body:"Tajik, Russian and English — the student chooses."}
+  ],
+  aiKicker:"AI tutor", aiTitle:"Didn't follow the lesson? Ask.",
+  aiBody:"In class a topic is explained once. On eMaktab it is explained as many times as you need, with familiar examples, in Tajik.",
+  aiPoints:["Answers any curriculum question, grades 1 to 11","Explains topics with local, familiar examples","Works through problems step by step","Prepares students for national and final exams"],
+  solvePlaceholder:"For example: 2x + 5 = 17", solveButton:"Solve",
+  solveEmpty:"Type a question first", solveLoading:"Solving…", solveError:"Something went wrong. Try again.",
+  mockPanel:"AI tutor", mockGrade:"Grade 9",
+  transcript:[
+    {who:"Student", me:true, text:"What is mitosis and how many phases does it have?"},
+    {who:"eMaktab", me:false, text:"Mitosis is the division of a somatic cell: one cell becomes two identical cells.\n\n1. Prophase — chromosomes condense\n2. Metaphase — they line up at the centre\n3. Anaphase — they separate to the poles\n4. Telophase — two new nuclei"},
+    {who:"Student", me:true, text:"How is that different from meiosis?"}
+  ],
+  howKicker:"How it works", howTitle:"Four steps to knowledge",
+  steps:[
+    {n:"01", title:"Sign up", body:"Enter a name and a grade. Thirty seconds, free, no card."},
+    {n:"02", title:"Pick a lesson", body:"Choose a subject and topic from 3,574 lessons."},
+    {n:"03", title:"Read and ask", body:"Read, take the quiz, and ask the AI tutor anything you missed."},
+    {n:"04", title:"Sit the exam", body:"A final exam at the end of each subject — real exam preparation."}
+  ],
+  ctaTitleA:"Start today, ", ctaTitleB:"free",
+  ctaBody:"Signing up takes thirty seconds. Your device is enough — a steady connection is not required.",
+  ctaButton:"Enter the platform", ctaNote:"Free · no ads · no card",
+  footTag:"The educational platform of Tajikistan, grades 1 to 11.",
+  footPlatform:"Platform", footLogin:"Log in", footSupport:"Support", footTerms:"Terms of use",
+  footContact:"Contact", footCredit:"Built by Bahrom Ashurov"
+}
+};
+
+// ══════════════════════════════════════════════════════════════════
+// REAL curriculum data (per-grade subject names) — already used
+// elsewhere on the platform. Drives the ring carousel and the
+// curriculum stage cards with real subject counts (no invented numbers).
+// ══════════════════════════════════════════════════════════════════
+const GRADES = {
+  1: ['Забони тоҷикӣ','Математика','Ҷаҳони атроф','Тарбияи ҷисмонӣ','Санъат','Мусиқӣ','Меҳнат'],
+  2: ['Забони тоҷикӣ','Математика','Ҷаҳони атроф','Забони русӣ'],
+  3: ['Забони тоҷикӣ','Математика','Ҷаҳони атроф','Забони русӣ'],
+  4: ['Забони тоҷикӣ','Математика','Ҷаҳони атроф','Забони русӣ'],
+  5: ['Забони тоҷикӣ','Математика','Биология','Таърих','Адабиёт','Забони русӣ','Забони англисӣ'],
+  6: ['Забони тоҷикӣ','Математика','Биология','Таърих','Ҷуғрофия','Забони русӣ','Забони англисӣ'],
+  7: ['Алгебра','Геометрия','Физика','Биология','Таърих','Ҷуғрофия','Тоҷикӣ','Русӣ','Англисӣ'],
+  8: ['Алгебра','Геометрия','Физика','Кимиё','Биология','Таърих','Ҷуғрофияи Тоҷ','Русӣ','Англисӣ'],
+  9: ['Алгебра','Геометрия','Физика','Кимиё','Биология','Таърих','Информатика','Давлатдорӣ','Тоҷикӣ','Русӣ','Англисӣ'],
+  10: ['Алгебра','Геометрия','Физика','Кимиё','Биология','Таърих','Ҷуғрофия','Информатика','Иқтисод','Ҳуқуқ','Англисӣ','Русӣ'],
+  11: ['Алгебра','Геометрия','Физика','Кимиё','Биология','Таърих','Астрономия','Информатика','Тоҷикӣ','Адабиёт','Англисӣ'],
+};
+const RING_SUBJECTS_EN = {
+  'Математика':'Mathematics','Забони тоҷикӣ':'Tajik language','Алгебра':'Algebra','Физика':'Physics',
+  'Кимиё':'Chemistry','Биология':'Biology','Таърих':'History','Забони русӣ':'Russian','Русӣ':'Russian',
+  'Забони англисӣ':'English','Англисӣ':'English','Информатика':'Computing','Геометрия':'Geometry','Ҷуғрофия':'Geography'
+};
+const RING_ORDER = ['Математика','Физика','Кимиё','Биология','Забони тоҷикӣ','Таърих','Забони англисӣ'];
+
+let lang = 'tg';
+
+function earliestGrade(subject){
+  for(let g=1; g<=11; g++){ if((GRADES[g]||[]).includes(subject)) return g; }
+  return null;
+}
+
+function buildRing(){
+  const ring = document.getElementById('ring');
+  ring.innerHTML = '';
+  const n = RING_ORDER.length;
+  RING_ORDER.forEach((subj,i)=>{
+    const grade = earliestGrade(subj);
+    const gradeWord = lang==='tg' ? `Синфи ${grade}` : `Grade ${grade}`;
+    const name = lang==='tg' ? subj : (RING_SUBJECTS_EN[subj]||subj);
+    const card = document.createElement('div');
+    card.className = 'ring-card';
+    card.style.transform = `rotateY(${i*(360/n)}deg) translateZ(200px)`;
+    const lessonsWord = lang==='tg' ? '200+ дарс' : '200+ lessons';
+    card.innerHTML = `<div class="rc-grade">${gradeWord}</div><div class="rc-name">${name}</div><div class="rc-lessons">${lessonsWord}</div>`;
+    ring.appendChild(card);
+  });
+}
+
+function buildStageCards(){
+  const t = STR[lang];
+  const el = document.getElementById('stage-cards');
+  el.innerHTML = '';
+  t.stages.forEach((s,idx)=>{
+    const subjSet = new Set();
+    s.g.forEach(g=>(GRADES[g]||[]).forEach(sub=>subjSet.add(sub)));
+    const card = document.createElement('div');
+    card.className = 'cur-card';
+    card.setAttribute('data-reveal','');
+    card.innerHTML = `
+      <div class="cc-grade">${s.grade}</div>
+      <div class="cc-stage">${s.stage}</div>
+      <div class="cc-body">${s.body}</div>
+      <div class="cc-foot"><span>${subjSet.size >= 15 ? subjSet.size : '15+'} ${t.subjWord}</span></div>
+    `;
+    el.appendChild(card);
+  });
+  observeReveals();
+}
+
+function buildFeatureCards(){
+  const t = STR[lang];
+  const el = document.getElementById('feature-cards');
+  el.innerHTML = '';
+  t.features.forEach(f=>{
+    const card = document.createElement('div');
+    card.className = 'feat-card';
+    card.setAttribute('data-reveal','');
+    card.innerHTML = `
+      <div class="feat-icon">${ICONS[f.k]||''}</div>
+      <div class="feat-title">${f.title}</div>
+      <div class="feat-body">${f.body}</div>
+    `;
+    el.appendChild(card);
+  });
+  observeReveals();
+}
+
+function buildAIPoints(){
+  const t = STR[lang];
+  const el = document.getElementById('ai-points');
+  el.innerHTML = t.aiPoints.map((p,i)=>`
+    <div class="ai-point"><div class="n">${String(i+1).padStart(2,'0')}</div><div class="t">${p}</div></div>
+  `).join('');
+}
+
+function buildTranscript(){
+  const t = STR[lang];
+  const el = document.getElementById('chat-transcript');
+  el.innerHTML = t.transcript.map(m=>`
+    <div class="msg-row ${m.me?'me':'bot'}">
+      <div class="bubble"><div class="speaker">${m.who}</div><div class="text">${m.text}</div></div>
+    </div>
+  `).join('');
+}
+
+function buildSteps(){
+  const t = STR[lang];
+  const el = document.getElementById('steps-grid');
+  el.innerHTML = t.steps.map(s=>`
+    <div class="step" data-reveal>
+      <div class="numeral">${s.n}</div>
+      <div class="stitle">${s.title}</div>
+      <div class="sbody">${s.body}</div>
+    </div>
+  `).join('');
+  observeReveals();
+}
+
+function applyStaticText(){
+  const t = STR[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-ph');
+    if(t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+  });
+  document.documentElement.lang = lang;
+}
+
+window.setLang = function(l){
+  lang = l;
+  document.getElementById('lang-tg').classList.toggle('active', l==='tg');
+  document.getElementById('lang-en').classList.toggle('active', l==='en');
+  applyStaticText();
+  buildRing();
+  buildStageCards();
+  buildFeatureCards();
+  buildAIPoints();
+  buildTranscript();
+  buildSteps();
+};
+
+// ══════════════════════════════════════════════════════════════════
+// SCROLL REVEAL — IntersectionObserver + failsafe + reduced-motion
+// ══════════════════════════════════════════════════════════════════
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let revealObserver;
+function observeReveals(){
+  if(prefersReduced) return;
+  if(!revealObserver){
+    revealObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, {rootMargin:'0px 0px -6% 0px', threshold:0.04});
+  }
+  document.querySelectorAll('[data-reveal]:not(.visible)').forEach((el,i)=>{
+    revealObserver.observe(el);
+    setTimeout(()=>{ if(!el.classList.contains('visible')) el.classList.add('visible'); }, 1100 + 20*i);
+  });
+}
+
+// ══════════════════════════════════════════════════════════════════
+// COUNT-UP
+// ══════════════════════════════════════════════════════════════════
+function countUp(el){
+  const target = parseInt(el.getAttribute('data-count'), 10);
+  if(!target) return;
+  if(prefersReduced){ el.textContent = target.toLocaleString('en-US'); return; }
+  const dur = 1200, start = performance.now();
+  function tick(now){
+    const p = Math.min(1, (now-start)/dur);
+    const eased = 1 - Math.pow(1-p, 3);
+    el.textContent = Math.round(eased*target).toLocaleString('en-US');
+    if(p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const statObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('[data-count]').forEach(countUp);
+      statObserver.unobserve(e.target);
+    }
+  });
+}, {threshold:0.3});
+
+// ══════════════════════════════════════════════════════════════════
+// AI PANEL TILT
+// ══════════════════════════════════════════════════════════════════
+(function(){
+  const wrap = document.querySelector('.ai-panel-wrap');
+  const tilt = document.getElementById('ai-tilt');
+  if(!wrap || !tilt) return;
+  if(window.matchMedia('(pointer: coarse)').matches) return;
+  wrap.addEventListener('mousemove', (e)=>{
+    const r = wrap.getBoundingClientRect();
+    const x = (e.clientX - r.left)/r.width - 0.5;
+    const y = (e.clientY - r.top)/r.height - 0.5;
+    tilt.classList.add('tracking');
+    tilt.style.transform = `rotateY(${x*12}deg) rotateX(${-y*9}deg)`;
+  });
+  wrap.addEventListener('mouseleave', ()=>{
+    tilt.classList.remove('tracking');
+    tilt.style.transform = 'rotateY(0) rotateX(0)';
+  });
+})();
+
+// ══════════════════════════════════════════════════════════════════
+// SOLVER — real call to the eMaktab AI Cloud Function
+// ══════════════════════════════════════════════════════════════════
+window.runSolver = async function(){
+  const t = STR[lang];
+  const input = document.getElementById('solve-input');
+  const btn = document.getElementById('solve-btn');
+  const out = document.getElementById('solve-output');
+  const q = input.value.trim();
+  if(!q){ out.innerHTML = `<div class="solve-msg error">${t.solveEmpty}</div>`; return; }
+
+  btn.disabled = true;
+  const origLabel = btn.textContent;
+  btn.textContent = t.solveLoading;
+  out.innerHTML = `<div class="solve-msg">${t.solveLoading}</div>`;
+
+  try{
+    const sys = lang==='tg'
+      ? 'Ту еМактаб AI-омӯзгор ҳастӣ. Масъаларо қадам ба қадам, кӯтоҳ, бо забони тоҷикӣ ҳал кун. Ҳар қадамро дар хати алоҳида нависон.'
+      : 'You are the eMaktab AI tutor. Solve the problem step by step, briefly. Put each step on its own line.';
+    const resp = await fetch('https://geminiproxy-rcwua2htiq-uc.a.run.app', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ prompt: q, system: sys })
+    });
+    const data = await resp.json();
+    if(!resp.ok || !data.text) throw new Error(data.error || 'no text');
+    const lines = data.text.split('\n').map(l=>l.trim()).filter(Boolean);
+    out.innerHTML = `<div class="solve-steps">` + lines.map((l,i)=>`
+      <div class="solve-step"><div class="n">${i+1}</div><div class="t">${l.replace(/^\d+[.)]\s*/,'')}</div></div>
+    `).join('') + `</div>`;
+  }catch(err){
+    console.error(err);
+    out.innerHTML = `<div class="solve-msg error">${t.solveError}</div>`;
+  }finally{
+    btn.disabled = false;
+    btn.textContent = origLabel;
+  }
+};
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='Enter' && document.activeElement && document.activeElement.id==='solve-input') runSolver();
+});
+
+// ══════════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════════
+applyStaticText();
+buildRing();
+buildStageCards();
+buildFeatureCards();
+buildAIPoints();
+buildTranscript();
+buildSteps();
+observeReveals();
+document.querySelectorAll('#stat-row').forEach(el=>statObserver.observe(el));
+</script>
+</body>
+</html>
