@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /admin.html
-Disallow: /stats.html
-
-Sitemap: https://emaktab.online/sitemap.xml

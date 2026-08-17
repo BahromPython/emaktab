@@ -93,5 +93,16 @@ node_modules/
 /public/eMaktab_lms_v2_backup_*.html
 /public/eMaktab_lms_v2_quiz_checkpoint_*.html
 /public/eMaktab_lms_v2_exam_checkpoint_*.html
+/public/index_backup_*.html
 /netlify/
 /netlify.toml
+
+# Root-level duplicates of files that live under public/ (the only dir Firebase serves)
+/robots.txt
+/sitemap.xml
+/admin.html
+/index.html
+/eMaktab_lms_v2.html
+/manifest.json
+/stats.html
+/sw.js

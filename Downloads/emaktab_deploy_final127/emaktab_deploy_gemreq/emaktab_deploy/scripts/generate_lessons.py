@@ -24,7 +24,7 @@ except ImportError:
 
 # ── CONFIG ────────────────────────────────────────────────────────────────────
 GEMINI_KEY = os.environ.get('GEMINI_KEY', 'YOUR_GEMINI_API_KEY_HERE')
-HTML_FILE  = 'eMaktab_lms_v2.html'  # path to your HTML file
+HTML_FILE  = '../public/eMaktab_lms_v2.html'  # path to your HTML file
 BATCH_SIZE = 5     # parallel requests (keep at 5 to avoid rate limits)
 DELAY      = 0.3   # seconds between batches
 SKIP_EXISTING = True  # skip lessons that already have 600+ char bodies

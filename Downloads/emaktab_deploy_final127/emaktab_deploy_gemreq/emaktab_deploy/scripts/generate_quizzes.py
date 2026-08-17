@@ -22,7 +22,7 @@ except ImportError:
 
 # ── CONFIG ────────────────────────────────────────────────────────────────────
 GEMINI_KEY   = os.environ.get('GEMINI_KEY', 'YOUR_GEMINI_API_KEY_HERE')
-HTML_FILE    = 'eMaktab_lms_v2.html'
+HTML_FILE    = '../public/eMaktab_lms_v2.html'
 BATCH_SIZE   = 1       # sequential — avoids 429
 DELAY        = 8.0     # seconds between requests (~7 RPM, safely under free-tier 15 RPM)
 SKIP_EXISTING = True   # skip lessons that already have >= 3 questions

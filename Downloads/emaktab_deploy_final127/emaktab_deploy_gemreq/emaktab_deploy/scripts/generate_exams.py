@@ -25,7 +25,7 @@ except ImportError:
 
 # ── CONFIG ────────────────────────────────────────────────────────────────────
 GEMINI_KEY    = os.environ.get('GEMINI_KEY', 'YOUR_GEMINI_API_KEY_HERE')
-HTML_FILE     = 'eMaktab_lms_v2.html'
+HTML_FILE     = '../public/eMaktab_lms_v2.html'
 BATCH_SIZE    = 4      # parallel (lower than quiz — larger prompts)
 DELAY         = 0.3
 MIN_QUESTIONS = 20     # minimum per exam
